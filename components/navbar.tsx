@@ -17,6 +17,10 @@ const links = [
     path: '/photo',
     title: 'Photo',
   },
+  {
+    path: '/uses',
+    title: 'Uses',
+  },
 ]
 
 const Navbar = () => {
