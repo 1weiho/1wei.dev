@@ -1,6 +1,7 @@
 'use client'
 
 import { cn } from '@/lib/utils'
+import { ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -33,6 +34,14 @@ const Navbar = () => {
           {link.title}
         </Link>
       ))}
+      <Link
+        href="https://links.1wei.dev"
+        target="_blank"
+        className="flex items-center gap-1"
+      >
+        Links
+        <ArrowUpRight className="size-4" />
+      </Link>
     </nav>
   )
 }
