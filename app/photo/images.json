@@ -81,5 +81,17 @@
     "date": "2025-04-04",
     "latitude": 21.9417,
     "longitude": 120.805
+  },
+  {
+    "url": "https://qpsypezomogp2dxq.public.blob.vercel-storage.com/photo/fxn%202025-06-07%20191118.107.JPG",
+    "description": "Shennong Street, Tainan",
+    "date": "2025-06-07"
+  },
+  {
+    "url": "https://qpsypezomogp2dxq.public.blob.vercel-storage.com/photo/fxn%202025-06-08%20183919.110.jpg",
+    "description": "Yuguang Island, Tainan",
+    "date": "2025-06-08",
+    "latitude": 22.9808,
+    "longitude": 120.1543
   }
 ]
