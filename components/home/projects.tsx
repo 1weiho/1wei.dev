@@ -2,24 +2,24 @@ import ProjectItem from './project'
 import { Project } from '@/lib/type'
 
 const projects: Project[] = [
-  {
-    title: 'GH Link',
-    description: 'A Link in Bio website configured with only a JSON file.',
-    url: 'https://gh-link.vercel.app/',
-    category: 'next-js',
-  },
+  // {
+  //   title: 'GH Link',
+  //   description: 'A Link in Bio website configured with only a JSON file.',
+  //   url: 'https://gh-link.vercel.app/',
+  //   category: 'next-js',
+  // },
   {
     title: 'SVGL',
     description: 'The Raycast extension to search SVG logos via svgl.',
     url: 'https://www.raycast.com/1weiho/svgl',
     category: 'raycast-extension',
   },
-  {
-    title: 'Open Graph',
-    description: 'Preview Open Graph meta tags of a website.',
-    url: 'https://www.raycast.com/1weiho/open-graph',
-    category: 'raycast-extension',
-  },
+  // {
+  //   title: 'Open Graph',
+  //   description: 'Preview Open Graph meta tags of a website.',
+  //   url: 'https://www.raycast.com/1weiho/open-graph',
+  //   category: 'raycast-extension',
+  // },
   {
     title: 'Next Sandbox',
     description:
@@ -27,12 +27,12 @@ const projects: Project[] = [
     url: 'https://next-sandbox.1wei.dev/',
     category: 'npm-package',
   },
-  {
-    title: 'rwdot',
-    description: 'Shows your window’s Tailwind size for easier RWD.',
-    url: 'https://www.npmjs.com/package/rwdot',
-    category: 'npm-package',
-  },
+  // {
+  //   title: 'rwdot',
+  //   description: 'Shows your window’s Tailwind size for easier RWD.',
+  //   url: 'https://www.npmjs.com/package/rwdot',
+  //   category: 'npm-package',
+  // },
 ]
 
 const Projects = () => {
