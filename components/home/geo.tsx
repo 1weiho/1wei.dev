@@ -4,7 +4,7 @@ import Balancer from 'react-wrap-balancer'
 
 const Geo = () => {
   return (
-    <div className="flex flex-col md:mt-32 md:flex-row md:space-x-12 justify-center items-center py-32 md:py-40">
+    <div className="flex flex-col md:mt-28 md:flex-row md:space-x-12 justify-center items-center py-32 md:py-40">
       <UTC8Clock className="md:hidden" />
       <Earth />
       <div className="max-w-[500px] text-center md:text-start mt-8 md:mt-0">

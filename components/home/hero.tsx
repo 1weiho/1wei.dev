@@ -21,7 +21,7 @@ const Hero = () => {
         <h1 className="text-2xl md:text-3xl text-black">你好 👋</h1>
       </div>
 
-      <h2 className="mt-8 md:mt-16 text-xl md:text-2xl text-black">
+      <h2 className="mt-8 md:mt-16 text-3xl md:text-4xl text-black font-[family-name:var(--font-instrument-serif)]">
         Yiwei Here!
       </h2>
 
