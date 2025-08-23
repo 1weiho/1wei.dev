@@ -29,7 +29,7 @@ const Hero = () => {
         <Balancer>
           I am currently a backend developer at Microprogram, where we have
           built a world-class public bike-sharing system in Taiwan. I have a
-          passion for exploring new front-end and back-end technologies, and I
+          passion for exploring new frontend and backend technologies, and I
           am deeply inspired by beautiful and innovative designs.
         </Balancer>
       </div>
