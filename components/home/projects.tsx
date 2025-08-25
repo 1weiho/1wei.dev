@@ -2,24 +2,12 @@ import ProjectItem from './project'
 import { Project } from '@/lib/type'
 
 const projects: Project[] = [
-  // {
-  //   title: 'GH Link',
-  //   description: 'A Link in Bio website configured with only a JSON file.',
-  //   url: 'https://gh-link.vercel.app/',
-  //   category: 'next-js',
-  // },
   {
     title: 'SVGL',
     description: 'The Raycast extension to search SVG logos via svgl.',
     url: 'https://www.raycast.com/1weiho/svgl',
     category: 'raycast-extension',
   },
-  // {
-  //   title: 'Open Graph',
-  //   description: 'Preview Open Graph meta tags of a website.',
-  //   url: 'https://www.raycast.com/1weiho/open-graph',
-  //   category: 'raycast-extension',
-  // },
   {
     title: 'Next Sandbox',
     description:
@@ -27,22 +15,16 @@ const projects: Project[] = [
     url: 'https://next-sandbox.1wei.dev/',
     category: 'npm-package',
   },
-  // {
-  //   title: 'rwdot',
-  //   description: 'Shows your window’s Tailwind size for easier RWD.',
-  //   url: 'https://www.npmjs.com/package/rwdot',
-  //   category: 'npm-package',
-  // },
 ]
 
 const Projects = () => {
   return (
     <div className="md:mt-40 mt-20">
-      <h2 className="mt-16 text-3xl md:text-4xl text-black font-[family-name:var(--font-instrument-serif)]">
-        Projects
+      <h2 className="text-3xl md:text-4xl font-bold text-center">
+        Featured Projects
       </h2>
 
-      <div className="mt-8 space-y-8 md:space-y-12">
+      <div className="mt-12 grid gap-8 md:grid-cols-2">
         {projects.map((project, index) => (
           <ProjectItem key={index} {...project} />
         ))}
