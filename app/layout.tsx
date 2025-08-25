@@ -3,22 +3,16 @@ import LightRay from '@/components/light-ray'
 import Navbar from '@/components/navbar'
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono, Instrument_Serif } from 'next/font/google'
+import { Inter, Roboto_Mono } from 'next/font/google'
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const inter = Inter({
+  variable: '--font-inter',
   subsets: ['latin'],
 })
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const robotoMono = Roboto_Mono({
+  variable: '--font-roboto-mono',
   subsets: ['latin'],
-})
-
-const instrumentSerif = Instrument_Serif({
-  variable: '--font-instrument-serif',
-  subsets: ['latin'],
-  weight: ['400'],
 })
 
 export const metadata: Metadata = {
@@ -51,10 +45,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} antialiased`}
+        className={`${inter.variable} ${robotoMono.variable} antialiased dark`}
       >
         <LightRay />
-        <div className="container mx-auto font-[family-name:var(--font-geist-mono)] px-6">
+        <div className="container mx-auto font-[family-name:var(--font-roboto-mono)] px-6">
           <Navbar />
           {children}
         </div>

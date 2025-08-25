@@ -1,0 +1,14 @@
+
+> 1wei.dev@0.1.0 dev /app
+> next dev --turbopack
+
+ ⚠ Port 3000 is in use, trying 3001 instead.
+   ▲ Next.js 15.2.0 (Turbopack)
+   - Local:        http://localhost:3001
+   - Network:      http://192.168.0.2:3001
+   - Experiments (use with caution):
+     · turbo
+     ✓ viewTransition
+
+ ✓ Starting...
+ ✓ Ready in 2.2s

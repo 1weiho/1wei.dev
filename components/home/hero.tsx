@@ -2,56 +2,47 @@ import Github from '@/components/svg/github'
 import X from '@/components/svg/x'
 import Image from 'next/image'
 import Link from 'next/link'
-import { unstable_ViewTransition as ViewTransition } from 'react'
 import Balancer from 'react-wrap-balancer'
 
 const Hero = () => {
   return (
-    <div>
-      <div className="flex items-center gap-4 md:gap-8 mt-20 md:mt-32">
-        <ViewTransition name="avatar">
-          <Image
-            src="/assets/avatar.jpeg"
-            alt="Avatar"
-            width={600}
-            height={600}
-            className="rounded-full h-16 w-16 md:h-24 md:w-24"
-          />
-        </ViewTransition>
-        <h1 className="text-2xl md:text-3xl text-black">你好 👋</h1>
+    <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16 mt-20 md:mt-32">
+      <div className="flex-shrink-0">
+        <Image
+          src="/assets/avatar.jpeg"
+          alt="Avatar"
+          width={200}
+          height={200}
+          className="rounded-full h-32 w-32 md:h-48 md:w-48"
+        />
       </div>
-
-      <h2 className="mt-8 md:mt-16 text-3xl md:text-4xl text-black font-[family-name:var(--font-instrument-serif)]">
-        Yiwei Here!
-      </h2>
-
-      <div className="mt-6 md:mt-10 max-w-[900px] text-sm md:text-base">
-        <Balancer>
-          I am currently a backend developer at Microprogram, where we have
-          built a world-class public bike-sharing system in Taiwan. I have a
-          passion for exploring new frontend and backend technologies, and I
-          am deeply inspired by beautiful and innovative designs.
-        </Balancer>
-      </div>
-
-      <div className="mt-8 flex gap-8 items-center">
-        <Link
-          href="https://x.com/1weiho"
-          target="_blank"
-          className="flex items-center gap-2 hover:text-black duration-300 group text-sm md:text-base"
-        >
-          <X className="grayscale-0 md:grayscale opacity-100 md:opacity-50 transition-all duration-300 md:group-hover:grayscale-0 md:group-hover:opacity-100" />
-          Twitter
-        </Link>
-
-        <Link
-          href="https://github.com/1weiho"
-          target="_blank"
-          className="flex items-center gap-2 hover:text-black duration-300 group text-sm md:text-base"
-        >
-          <Github className="grayscale-0 md:grayscale opacity-100 md:opacity-50 transition-all duration-300 md:group-hover:grayscale-0 md:group-hover:opacity-100" />
-          GitHub
-        </Link>
+      <div className="flex flex-col gap-4 text-center md:text-left">
+        <h1 className="text-4xl md:text-5xl font-bold">Yiwei Ho</h1>
+        <h2 className="text-xl md:text-2xl text-muted-foreground">
+          Full-stack Developer
+        </h2>
+        <div className="mt-4 max-w-xl text-base md:text-lg">
+          <Balancer>
+            I craft seamless user experiences and build scalable systems.
+            Passionate about beautiful design and innovative technologies.
+          </Balancer>
+        </div>
+        <div className="mt-6 flex gap-6 justify-center md:justify-start">
+          <Link
+            href="https://x.com/1weiho"
+            target="_blank"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <X className="h-6 w-6" />
+          </Link>
+          <Link
+            href="https://github.com/1weiho"
+            target="_blank"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <Github className="h-6 w-6" />
+          </Link>
+        </div>
       </div>
     </div>
   )
