@@ -37,8 +37,8 @@ const projects: Project[] = [
 
 const Projects = () => {
   return (
-    <div className="md:mt-40 mt-20">
-      <h2 className="mt-16 text-3xl md:text-4xl text-black font-[family-name:var(--font-instrument-serif)]">
+    <div className="mt-20 md:mt-40">
+      <h2 className="mt-16 text-4xl md:text-5xl text-pink-500 drop-shadow-[0_0_0.75rem_#ff00ff]">
         Projects
       </h2>
 

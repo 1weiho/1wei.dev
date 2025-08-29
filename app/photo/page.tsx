@@ -18,8 +18,10 @@ export const metadata: Metadata = {
 const PhotoPage = () => {
   return (
     <div className="mt-20 md:mt-32 pb-20">
-      <h1 className="text-2xl text-black">Photo</h1>
-      <h2 className="mt-1 text-gray-500 text-sm">
+      <h1 className="text-3xl text-pink-500 drop-shadow-[0_0_0.5rem_#ff00ff]">
+        Photo
+      </h1>
+      <h2 className="mt-1 text-sm text-fuchsia-200">
         Some memories I want to cherish.
       </h2>
 
@@ -36,7 +38,7 @@ const PhotoPage = () => {
                 priority={index < 8}
               />
             </AspectRatio>
-            <div className="flex justify-between text-xs text-gray-500 mt-1">
+            <div className="mt-1 flex justify-between text-xs text-fuchsia-200">
               <p>{image.date}</p>
               {image.latitude && image.longitude && (
                 <GoogleMapUrl

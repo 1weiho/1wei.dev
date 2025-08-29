@@ -1,6 +1,6 @@
 const LightRay = () => {
   return (
-    <div className="absolute top-0 right-0 w-60 h-60 md:w-[500px] md:h-[500px] bg-linear-to-br from-transparent to-amber-300 opacity-30 blur-3xl pointer-events-none"></div>
+    <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,#ff00ff,transparent)] opacity-40 blur-3xl mix-blend-screen animate-pulse"></div>
   )
 }
 
