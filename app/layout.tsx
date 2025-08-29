@@ -1,25 +1,7 @@
 import './globals.css'
-import LightRay from '@/components/light-ray'
 import Navbar from '@/components/navbar'
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono, Instrument_Serif } from 'next/font/google'
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-})
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-})
-
-const instrumentSerif = Instrument_Serif({
-  variable: '--font-instrument-serif',
-  subsets: ['latin'],
-  weight: ['400'],
-})
 
 export const metadata: Metadata = {
   title: 'Yiwei Ho',
@@ -50,11 +32,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} antialiased`}
-      >
-        <LightRay />
-        <div className="container mx-auto font-[family-name:var(--font-geist-mono)] px-6">
+      <body className="bg-[#c0c0c0] text-black min-h-screen font-sans">
+        <div className="container mx-auto px-6">
           <Navbar />
           {children}
         </div>

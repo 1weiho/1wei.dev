@@ -6,18 +6,18 @@ import Link from 'next/link'
 
 const ProjectItem = ({ title, description, url, category }: Project) => {
   return (
-    <Link className="group block" href={url} target="_blank">
-      <div className="flex gap-2 items-center">
-        <h3 className="text-black">{title}</h3>
+    <Link className="group block text-blue-700 hover:underline" href={url} target="_blank">
+      <div className="flex items-center gap-2">
+        <h3 className="font-bold text-[#000080]">{title}</h3>
         {category === 'raycast-extension' ? (
-          <Raycast className="grayscale-0 md:grayscale opacity-100 md:opacity-50 transition-all duration-300 md:group-hover:grayscale-0 md:group-hover:opacity-100" />
+          <Raycast className="opacity-60 group-hover:opacity-100 transition-opacity" />
         ) : category === 'next-js' ? (
-          <Next className="grayscale-0 md:grayscale opacity-100 md:opacity-50 transition-all duration-300 md:group-hover:grayscale-0 md:group-hover:opacity-100" />
+          <Next className="opacity-60 group-hover:opacity-100 transition-opacity" />
         ) : (
-          <NPM className="grayscale-0 md:grayscale opacity-100 md:opacity-50 transition-all duration-300 md:group-hover:grayscale-0 md:group-hover:opacity-100" />
+          <NPM className="opacity-60 group-hover:opacity-100 transition-opacity" />
         )}
       </div>
-      <p className="mt-2 text-xs md:text-sm">{description}</p>
+      <p className="mt-2 text-xs md:text-sm text-black">{description}</p>
     </Link>
   )
 }

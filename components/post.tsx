@@ -8,10 +8,10 @@ const PostItem = ({ slug, title, description, date, tags }: Post) => {
   return (
     <Link
       href={`/blog/${slug}`}
-      className="border block px-6 py-4 rounded-2xl bg-white/20 hover:bg-white/60 duration-150"
+      className="block border border-gray-500 bg-[#e0e0e0] px-6 py-4 shadow-[inset_-1px_-1px_0_0_#000,inset_1px_1px_0_0_#fff] hover:bg-[#d4d0c8]"
     >
-      <h3 className="text-black font-semibold">{title}</h3>
-      <p className="text-sm text-gray-500">{description}</p>
+      <h3 className="font-bold text-[#000080]">{title}</h3>
+      <p className="text-sm text-black">{description}</p>
 
       <div className="flex justify-between items-center mt-3">
         <ViewTransition name="avatar">
@@ -25,14 +25,14 @@ const PostItem = ({ slug, title, description, date, tags }: Post) => {
         </ViewTransition>
 
         <div className="flex items-center space-x-4">
-          <p className="text-xs">{date}</p>
+          <p className="text-xs text-black">{date}</p>
           <div className="flex space-x-2">
             {tags?.map((tag, index) => (
               <span
                 key={index}
-                className="text-xs bg-amber-100 px-1.5 py-0.5 rounded-lg flex items-center"
+                className="flex items-center border border-gray-500 bg-[#c0c0c0] px-1.5 py-0.5 text-xs text-black"
               >
-                <Tag className="h-2.5 w-2.5 mr-1" />
+                <Tag className="mr-1 h-2.5 w-2.5" />
                 {tag}
               </span>
             ))}
