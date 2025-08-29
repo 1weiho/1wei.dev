@@ -18,19 +18,21 @@ const Hero = () => {
             className="rounded-full h-16 w-16 md:h-24 md:w-24"
           />
         </ViewTransition>
-        <h1 className="text-2xl md:text-3xl text-black">你好 👋</h1>
+        <h1 className="text-xl md:text-2xl text-emerald-400 drop-shadow-[0_0_0.5rem_#39ff14]">
+          你好 👋
+        </h1>
       </div>
 
-      <h2 className="mt-8 md:mt-16 text-3xl md:text-4xl text-black font-[family-name:var(--font-instrument-serif)]">
+      <h2 className="mt-8 md:mt-16 text-4xl md:text-5xl text-pink-500 drop-shadow-[0_0_0.75rem_#ff00ff]">
         Yiwei Here!
       </h2>
 
-      <div className="mt-6 md:mt-10 max-w-[900px] text-sm md:text-base">
+      <div className="mt-6 md:mt-10 max-w-[900px] text-sm md:text-base text-fuchsia-200">
         <Balancer>
           I am currently a backend developer at Microprogram, where we have
           built a world-class public bike-sharing system in Taiwan. I have a
-          passion for exploring new frontend and backend technologies, and I
-          am deeply inspired by beautiful and innovative designs.
+          passion for exploring new frontend and backend technologies, and I am
+          deeply inspired by beautiful and innovative designs.
         </Balancer>
       </div>
 
@@ -38,7 +40,7 @@ const Hero = () => {
         <Link
           href="https://x.com/1weiho"
           target="_blank"
-          className="flex items-center gap-2 hover:text-black duration-300 group text-sm md:text-base"
+          className="flex items-center gap-2 text-fuchsia-200 transition-colors duration-300 hover:text-pink-500 group text-sm md:text-base"
         >
           <X className="grayscale-0 md:grayscale opacity-100 md:opacity-50 transition-all duration-300 md:group-hover:grayscale-0 md:group-hover:opacity-100" />
           Twitter
@@ -47,7 +49,7 @@ const Hero = () => {
         <Link
           href="https://github.com/1weiho"
           target="_blank"
-          className="flex items-center gap-2 hover:text-black duration-300 group text-sm md:text-base"
+          className="flex items-center gap-2 text-fuchsia-200 transition-colors duration-300 hover:text-pink-500 group text-sm md:text-base"
         >
           <Github className="grayscale-0 md:grayscale opacity-100 md:opacity-50 transition-all duration-300 md:group-hover:grayscale-0 md:group-hover:opacity-100" />
           GitHub

@@ -16,8 +16,10 @@ export const metadata: Metadata = {
 const Blog = () => {
   return (
     <div className="mt-20 md:mt-32 pb-20">
-      <h1 className="text-2xl text-black">Blog</h1>
-      <h2 className="mt-1 text-gray-500 text-sm">
+      <h1 className="text-3xl text-pink-500 drop-shadow-[0_0_0.5rem_#ff00ff]">
+        Blog
+      </h1>
+      <h2 className="mt-1 text-sm text-fuchsia-200">
         Try to develop the habit of writing articles.
       </h2>
 

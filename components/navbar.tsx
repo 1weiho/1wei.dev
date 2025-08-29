@@ -24,12 +24,15 @@ const Navbar = () => {
   const currentPathname = `/${usePathname().split('/')[1]}`
 
   return (
-    <nav className="mt-12 flex space-x-6 md:space-x-12">
+    <nav className="mt-12 flex space-x-6 md:space-x-12 text-emerald-400 tracking-widest uppercase">
       {links.map((link) => (
         <Link
           key={link.path}
           href={link.path}
-          className={cn(link.path === currentPathname && 'text-black')}
+          className={cn(
+            'transition-colors hover:text-pink-500',
+            link.path === currentPathname && 'text-pink-500',
+          )}
         >
           {link.title}
         </Link>
@@ -37,7 +40,7 @@ const Navbar = () => {
       <Link
         href="https://links.1wei.dev"
         target="_blank"
-        className="flex items-center gap-1"
+        className="flex items-center gap-1 transition-colors hover:text-pink-500"
       >
         Links
         <ArrowUpRight className="size-4" />
