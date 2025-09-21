@@ -183,9 +183,13 @@
     border: 1px solid hsl(47, 84%, 90%) !important;
   }
   pre.shiki code {
-    @apply grid;
+    @apply block;
+    white-space: normal;
   }
   pre.shiki .line {
-    @apply block;
+    @apply block whitespace-pre;
+  }
+  pre.shiki .line:empty:before {
+    content: ' ';
   }
 }
