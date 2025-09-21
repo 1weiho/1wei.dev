@@ -1,0 +1,189 @@
+## Building My First Raycast AI Extension for GitLab
+
+Recently, my company upgraded everyone's laptops to MacBooks. I had been developing backend services on Ubuntu, but this change meant one exciting thing for me: I could finally use **Raycast** at work! 🎉
+
+Since we use a self-hosted GitLab instance, I started exploring the **GitLab Raycast Extension**. It blew me away with how polished and complete it already was. But I noticed one limitation—it wasn't yet an **AI Extension**. That meant I couldn't just ask, for example, "Summarize my work progress for the week" and let the AI handle it. That's when the idea struck me: why not build it myself and turn it into an AI-powered Extension?
+
+I've developed extensions before (like svgl extension), but AI Extensions were new territory. This felt like the perfect chance to learn. And thankfully, Raycast provides fantastic documentation: [Creating an AI Extension](https://developers.raycast.com/ai/create-an-ai-extension). With that, I jumped right in.
+
+---
+
+### The Core Concept: Tools
+
+The heart of an AI Extension is the **tool**. If you've worked with MCP, it's a similar concept—basically, predefined actions that the LLM can call. Creating a tool is simple: just add a TypeScript file inside `src/tools`.
+
+For my first attempt, I built a tool to search GitLab projects. Here's what `search-projects.ts` looked like:
+
+```tsx
+import { gitlab } from '../common'
+
+type Input = {
+  /** Search keyword applied to project name/title. */
+  query: string
+  /** Whether to limit to member projects. String 'true' or 'false'. */
+  membership?: string
+}
+
+export default async function ({ query, membership }: Input) {
+  const projects = await gitlab.getProjects({
+    searchText: query,
+    searchIn: 'title',
+    membership: membership ?? 'true',
+  })
+
+  return projects
+}
+```
+
+The neat thing here is that thanks to this extension's existing GitLab integration, I could just reuse the `gitlab` helper. And notice the JSDoc comments above each parameter—those aren't just for humans, they help the AI understand what the arguments mean!
+
+Once the tool was ready, exported it via `src/tools/index.ts`:
+
+```tsx
+export { default as searchProjects } from './search-projects'
+```
+
+And finally, registered it in `package.json`:
+
+```json
+{
+  "tools": [
+    {
+      "name": "search-projects",
+      "title": "Search Projects",
+      "description": "Search gitlab projects"
+    }
+  ]
+}
+```
+
+At this point, I could already test it inside Raycast, and to my delight—it just worked. It's pretty magical how smoothly the API handles the LLM integration.
+
+![Search Projects](https://qpsypezomogp2dxq.public.blob.vercel-storage.com/blog/raycast-gitlab-ai-extension/Raycast%202025-09-21%20at%2022.39.54.png)
+
+---
+
+### Adding Confirmation: Closing Issues
+
+For my next tool, I wanted to let AI close GitLab issues. But since this is a potentially destructive action, I needed to add **confirmation**, keeping the human in the loop.
+
+Here's the implementation:
+
+```tsx
+import { gitlab } from '../common'
+
+type Input = {
+  projectId: number
+  issueIid: number
+}
+
+export async function confirmation({ projectId, issueIid }: Input) {
+  const issue = await gitlab.getIssue(projectId, issueIid, {})
+  return {
+    message: `Are you sure you want to close the issue?`,
+    info: [
+      {
+        name: 'Issue',
+        value: `${issue.reference_full || `#${issue.iid}`}: ${issue.title}`,
+      },
+      { name: 'Project', value: `${issue.project_id}` },
+    ],
+  }
+}
+
+export default async function ({ projectId, issueIid }: Input) {
+  await gitlab.put(`projects/${projectId}/issues/${issueIid}`, {
+    state_event: 'close',
+  })
+  return { ok: true }
+}
+```
+
+The confirmation step asks the user to review the issue details before closing it. This way, the AI doesn't accidentally close the wrong issue, pretty slick!
+
+![Tool Call Confirmation](https://qpsypezomogp2dxq.public.blob.vercel-storage.com/blog/raycast-gitlab-ai-extension/Raycast%202025-09-21%20at%2022.36.52.png)
+
+---
+
+### A Handy Shortcut: Opening in Browser
+
+Here's a fun little trick I added: an `open-in-browser` tool. This lets the AI find something for me, then instantly open it in my browser.
+
+```tsx
+import { open } from '@raycast/api'
+
+export type Input = {
+  url: string
+}
+
+export default async function ({ url }: Input) {
+  if (!url || url.length === 0) {
+    throw new Error('url is required')
+  }
+  await open(url)
+  return { ok: true, url }
+}
+```
+
+It's small, but it makes the workflow feel seamless.
+
+---
+
+### Testing With Evals
+
+One of the coolest parts of the process was writing **evals**. These are tests for your AI Extension that check whether the AI calls the right tools with the right parameters when given natural language input.
+
+You can define them either in `package.json` or in a dedicated `ai.json`. I prefer the latter—it feels cleaner. Here's an example:
+
+```json
+{
+  "evals": [
+    {
+      "input": "@gitlab What are my todos?",
+      "mocks": { "get-todos": [] },
+      "expected": [{ "callsTool": "get-todos" }]
+    },
+    {
+      "input": "@gitlab Search issues about login bug in the extensions project",
+      "mocks": {
+        "search-projects": [{ "name": "extensions", "id": 1561 }],
+        "search-issues": []
+      },
+      "expected": [
+        {
+          "callsTool": {
+            "name": "search-projects",
+            "arguments": { "query": "extensions" }
+          }
+        },
+        {
+          "callsTool": {
+            "name": "search-issues",
+            "arguments": { "projectId": 1561, "search": "login bug" }
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+In the second test, the AI first finds the project ID using `search-projects`, then uses `search-issues` to look up the specific bug. It's fascinating to watch the AI follow the chain of tools you designed.
+
+You can run these with:
+
+```bash
+npx ray evals
+```
+
+![Evals Test Results](https://qpsypezomogp2dxq.public.blob.vercel-storage.com/blog/raycast-gitlab-ai-extension/CleanShot%202025-09-21%20at%2022.54.32%402x.png)
+
+And once they all pass, you know your extension is robust and ready.
+
+---
+
+### Wrapping Up
+
+That’s it! With just a few tools and some evals, I had turned a traditional Raycast Extension into an AI Extension that users can interact with naturally—making the GitLab integration much more powerful. The developer experience is honestly delightful, and I’m amazed at how easy Raycast makes it.
+
+If you want to see my implementation in full, check it out here: [GitHub - Raycast GitLab Extension](https://github.com/raycast/extensions/tree/cfca614a8dd44a53383fae35201b2ba067415679/extensions/gitlab/)
