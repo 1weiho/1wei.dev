@@ -21,11 +21,11 @@ const Blog = () => {
         Try to develop the habit of writing articles.
       </h2>
 
-      <div className="mt-12 grid lg:grid-cols-2 2xl:grid-cols-3 gap-4">
+      <ul className="mt-8 divide-y divide-black/10">
         {posts.map((post) => (
           <Post key={post.slug} {...post} />
         ))}
-      </div>
+      </ul>
     </div>
   )
 }

@@ -1,36 +1,28 @@
 import { Post } from '@/lib/type'
 import { Tag } from 'lucide-react'
-import Image from 'next/image'
 import Link from 'next/link'
-import { unstable_ViewTransition as ViewTransition } from 'react'
 
 const PostItem = ({ slug, title, description, date, tags }: Post) => {
   return (
-    <Link
-      href={`/blog/${slug}`}
-      className="border block px-6 py-4 rounded-2xl bg-white/20 hover:bg-white/60 duration-150"
-    >
-      <h3 className="text-black font-semibold">{title}</h3>
-      <p className="text-sm text-gray-500">{description}</p>
+    <li className="py-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+        <div>
+          <Link
+            href={`/blog/${slug}`}
+            className="text-black font-semibold hover:underline"
+          >
+            {title}
+          </Link>
+          <p className="text-sm text-gray-500">{description}</p>
+        </div>
 
-      <div className="flex justify-between items-center mt-3">
-        <ViewTransition name="avatar">
-          <Image
-            src="/assets/avatar.jpeg"
-            alt="Avatar"
-            width={180}
-            height={180}
-            className="rounded-full size-6"
-          />
-        </ViewTransition>
-
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 shrink-0">
           <p className="text-xs">{date}</p>
-          <div className="flex space-x-2">
+          <div className="flex flex-wrap gap-2">
             {tags?.map((tag, index) => (
               <span
                 key={index}
-                className="text-xs bg-amber-100 px-1.5 py-0.5 rounded-lg flex items-center"
+                className="text-xs bg-amber-100 px-1.5 py-0.5 rounded-lg inline-flex items-center"
               >
                 <Tag className="h-2.5 w-2.5 mr-1" />
                 {tag}
@@ -39,7 +31,7 @@ const PostItem = ({ slug, title, description, date, tags }: Post) => {
           </div>
         </div>
       </div>
-    </Link>
+    </li>
   )
 }
 
