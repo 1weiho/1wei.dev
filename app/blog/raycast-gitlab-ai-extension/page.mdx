@@ -202,6 +202,20 @@ And once they all pass, you know your extension is robust and ready.
 
 ---
 
+### Adding Instructions in ai.json
+
+One nice bonus of using `ai.json` file is that besides writing evals, you can also add **instructions**. These guide the AI on how to interact with your extension. For example:
+
+```json
+{
+  "instructions": "- Please format Issues and Merge Requests as markdown links, e.g., [title](https://gitlab.com/:namespace/:project/-/issues/:iid) and [title](https://gitlab.com/:namespace/:project/-/merge_requests/:iid)\n- If the user provides a project that is not a full path (:namespace/:project), first use the search-projects tool to find the corresponding project. Before taking any action on an Issue, use search-issues to get the correct issue iid and projectId; before taking any action on an MR, use search-merge-requests to get the correct MR iid and projectId."
+}
+```
+
+This makes the interaction feel smarter and more natural—like teaching the AI how you want it to behave.
+
+---
+
 ### Wrapping Up
 
 That’s it! With just a few tools and some evals, I had turned a traditional Raycast Extension into an AI Extension that users can interact with naturally—making the GitLab integration much more powerful. The developer experience is honestly delightful, and I’m amazed at how easy Raycast makes it.
