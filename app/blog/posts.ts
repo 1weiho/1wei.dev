@@ -15,7 +15,7 @@ const posts = [
     description:
       'Turning GitLab Raycast Extension into an AI-powered Extension.',
     date: '2025-09-21',
-    tags: ['Raycast', 'GitLab'],
+    tags: ['Raycast'],
   },
 ] as Post[]
 
