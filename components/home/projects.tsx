@@ -9,7 +9,7 @@ const projects: Project[] = [
   //   category: 'next-js',
   // },
   {
-    title: 'SVGL',
+    title: 'SVGL Raycast Extension',
     description: 'The Raycast extension to search SVG logos via svgl.',
     url: 'https://www.raycast.com/1weiho/svgl',
     category: 'raycast-extension',
@@ -33,6 +33,13 @@ const projects: Project[] = [
   //   url: 'https://www.npmjs.com/package/rwdot',
   //   category: 'npm-package',
   // },
+  {
+    title: 'Next Lens',
+    description:
+      'A CLI tool for Next.js App Router to scan and list API and Page routes.',
+    url: 'https://github.com/1weiho/next-lens',
+    category: 'npm-package',
+  },
 ]
 
 const Projects = () => {
