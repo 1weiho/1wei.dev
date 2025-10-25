@@ -2,7 +2,7 @@ import Github from '@/components/svg/github'
 import X from '@/components/svg/x'
 import Image from 'next/image'
 import Link from 'next/link'
-import { unstable_ViewTransition as ViewTransition } from 'react'
+import { ViewTransition } from 'react'
 import Balancer from 'react-wrap-balancer'
 
 const Hero = () => {
