@@ -14,12 +14,12 @@ const projects: Project[] = [
     url: 'https://www.raycast.com/1weiho/svgl',
     category: 'raycast-extension',
   },
-  // {
-  //   title: 'Open Graph',
-  //   description: 'Preview Open Graph meta tags of a website.',
-  //   url: 'https://www.raycast.com/1weiho/open-graph',
-  //   category: 'raycast-extension',
-  // },
+  {
+    title: 'Open Graph Raycast Extension',
+    description: 'Preview Open Graph meta tags of a website.',
+    url: 'https://www.raycast.com/1weiho/open-graph',
+    category: 'raycast-extension',
+  },
   {
     title: 'Next Sandbox',
     description:
