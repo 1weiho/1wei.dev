@@ -12,7 +12,7 @@ const nextConfig: NextConfig = {
     ],
   },
   experimental: {
-    viewTransition: true,
+    mcpServer: true,
   },
 }
 
