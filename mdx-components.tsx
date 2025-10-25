@@ -1,8 +1,6 @@
 import { highlightToHtml } from './lib/shiki'
 import CopyButton from '@/components/ui/copy-button'
 import type { MDXComponents } from 'mdx/types'
-import Image from 'next/image'
-import { unstable_ViewTransition as ViewTransition } from 'react'
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
