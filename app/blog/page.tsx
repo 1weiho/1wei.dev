@@ -14,6 +14,20 @@ export const metadata: Metadata = {
 }
 
 const Blog = () => {
+  const postsByYear = posts.reduce(
+    (acc, post) => {
+      const year = new Date(post.date).getFullYear().toString()
+      if (!acc[year]) {
+        acc[year] = []
+      }
+      acc[year].push(post)
+      return acc
+    },
+    {} as Record<string, typeof posts>,
+  )
+
+  const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a))
+
   return (
     <div className="mt-20 md:mt-32 pb-20">
       <h1 className="text-2xl text-black">Blog</h1>
@@ -21,11 +35,25 @@ const Blog = () => {
         Try to develop the habit of writing articles.
       </h2>
 
-      <ul className="mt-8 divide-y divide-black/10">
-        {posts.map((post) => (
-          <Post key={post.slug} {...post} />
+      <div className="mt-12 space-y-12">
+        {years.map((year) => (
+          <div key={year}>
+            <h3 className="text-4xl font-[family-name:var(--font-instrument-serif)]">
+              {year}
+            </h3>
+            <ul className="divide-y divide-black/10">
+              {postsByYear[year]
+                .sort(
+                  (a, b) =>
+                    new Date(b.date).getTime() - new Date(a.date).getTime(),
+                )
+                .map((post) => (
+                  <Post key={post.slug} {...post} />
+                ))}
+            </ul>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   )
 }
