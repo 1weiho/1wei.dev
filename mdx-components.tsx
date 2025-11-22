@@ -1,4 +1,5 @@
 import { highlightToHtml } from './lib/shiki'
+import { parseUrl } from './lib/utils'
 import CopyButton from '@/components/ui/copy-button'
 import type { MDXComponents } from 'mdx/types'
 
@@ -36,7 +37,35 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       // Fallback to default rendering
       return <pre {...props} />
     },
-    a: (props) => <a target="_blank" rel="noopener noreferrer" {...props} />,
+    a: (props) => {
+      const href = props.href
+      if (href && (href.startsWith('http://') || href.startsWith('https://'))) {
+        const domain = parseUrl(href, true)
+        return (
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            {...props}
+            className="inline-flex items-baseline gap-1"
+          >
+            <img
+              src={`https://www.google.com/s2/favicons?domain=${domain}&sz=128`}
+              alt={`Favicon of ${domain}`}
+              width={16}
+              height={16}
+              className="inline-block align-baseline flex-shrink-0 rounded-sm"
+              style={{
+                marginTop: 0,
+                marginBottom: 0,
+                transform: 'translateY(2px)',
+              }}
+            />
+            {props.children}
+          </a>
+        )
+      }
+      return <a target="_blank" rel="noopener noreferrer" {...props} />
+    },
     ...components,
   }
 }

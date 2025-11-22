@@ -10,3 +10,12 @@ export const generateOgImageUrl = (title: string) => {
   const encodedTitle = encodeURIComponent(title)
   return `${baseUrl}?title=${encodedTitle}`
 }
+
+export const parseUrl = (url: string, getDomain: boolean = false) => {
+  try {
+    const urlObj = new URL(url)
+    return getDomain ? urlObj.hostname : url
+  } catch {
+    return url
+  }
+}
