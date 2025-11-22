@@ -17,6 +17,13 @@ const posts = [
     date: '2025-09-21',
     tags: ['Raycast'],
   },
+  {
+    slug: 'tokyo-ai-hackathon',
+    title: 'Tokyo AI Hackathon',
+    description: 'My experience participating in the Tokyo AI Hackathon.',
+    date: '2025-11-22',
+    tags: ['Raycast'],
+  },
 ] as Post[]
 
 export { posts }
