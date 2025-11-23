@@ -8,7 +8,7 @@ const PostItem = ({ slug, title, date }: Post) => {
         <div>
           <Link
             href={`/blog/${slug}`}
-            className="text-black font-semibold hover:underline"
+            className="text-black font-medium hover:underline"
           >
             {title}
           </Link>
