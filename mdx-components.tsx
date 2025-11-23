@@ -12,8 +12,11 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ),
     // Shiki-highlight for fenced code blocks
     pre: async (props) => {
-      const child = (props as any)?.children as any
-      const maybeCode = child && child.props ? child : null
+      const child = props.children as React.ReactElement<{
+        className?: string
+        children?: string
+      }>
+      const maybeCode = child?.props ? child : null
       const className: string | undefined = maybeCode?.props?.className
       const rawCode: string = String(maybeCode?.props?.children ?? '')
       // Remove trailing newlines to avoid rendering an extra blank line at the end
