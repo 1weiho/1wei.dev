@@ -6,7 +6,7 @@ import type { MDXComponents } from 'mdx/types'
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     wrapper: ({ children }) => (
-      <article className="prose mx-auto my-20 md:my-28 prose-headings:font-[family-name:var(--font-instrument-serif)] prose-headings:text-4xl prose-headings:font-normal prose-p:my-6 md:prose-p:my-8">
+      <article className="prose mx-auto my-20 md:my-28 tracking-tight prose-headings:font-[family-name:var(--font-instrument-serif)] prose-headings:text-4xl prose-headings:font-normal prose-p:my-6 prose-p:leading-7 prose-p:text-pretty md:prose-p:my-8 md:prose-p:leading-8">
         {children}
       </article>
     ),
