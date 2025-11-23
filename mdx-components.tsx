@@ -40,6 +40,19 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       // Fallback to default rendering
       return <pre {...props} />
     },
+    code: (props) => {
+      return (
+        <code
+          {...props}
+          className="relative rounded-md px-[0.4em] py-[0.2em] font-mono text-[0.9em] font-medium before:content-none after:content-none border"
+          style={{
+            backgroundColor: 'hsl(48deg, 100%, 96.1%)',
+            borderColor: 'hsl(47, 84%, 90%)',
+            color: 'hsl(0, 0%, 31%)',
+          }}
+        />
+      )
+    },
     a: (props) => {
       const href = props.href
       if (href && (href.startsWith('http://') || href.startsWith('https://'))) {
