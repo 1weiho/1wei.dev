@@ -27,4 +27,4 @@ pnpm dev
 
 All images in the public folder utilize the [Image Modification](https://www.raycast.com/HelloImSteven/sips) Raycast Extension, using the `Optimize Images` command with a Power 60 parameter.
 
-test 5
+test 6
