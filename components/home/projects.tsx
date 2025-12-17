@@ -37,7 +37,7 @@ const projects: Project[] = [
     title: 'Next Lens',
     description:
       'A CLI tool for Next.js App Router to scan and list API and Page routes.',
-    url: 'https://github.com/1weiho/next-lens',
+    url: 'https://next-lens.1wei.dev/',
     category: 'npm-package',
   },
 ]
