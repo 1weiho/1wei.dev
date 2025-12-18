@@ -15,6 +15,13 @@ const projects: Project[] = [
     category: 'raycast-extension',
   },
   {
+    title: 'Next Lens',
+    description:
+      'A CLI tool for Next.js App Router to scan and list API and Page routes.',
+    url: 'https://next-lens.1wei.dev/',
+    category: 'npm-package',
+  },
+  {
     title: 'Open Graph Raycast Extension',
     description: 'Preview Open Graph meta tags of a website.',
     url: 'https://www.raycast.com/1weiho/open-graph',
@@ -33,13 +40,6 @@ const projects: Project[] = [
   //   url: 'https://www.npmjs.com/package/rwdot',
   //   category: 'npm-package',
   // },
-  {
-    title: 'Next Lens',
-    description:
-      'A CLI tool for Next.js App Router to scan and list API and Page routes.',
-    url: 'https://next-lens.1wei.dev/',
-    category: 'npm-package',
-  },
 ]
 
 const Projects = () => {
