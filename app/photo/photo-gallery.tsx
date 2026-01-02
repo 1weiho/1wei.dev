@@ -49,29 +49,38 @@ export default function PhotoGallery({ images }: PhotoGalleryProps) {
   return (
     <div>
       {/* View Mode Toggle */}
-      <div className="flex gap-1 mt-6">
-        <button
-          onClick={() => setViewMode('grid')}
-          className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-md transition-colors ${
-            viewMode === 'grid'
-              ? 'bg-black text-white'
-              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-          }`}
-        >
-          <Grid className="size-4" />
-          Grid
-        </button>
-        <button
-          onClick={() => setViewMode('map')}
-          className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-md transition-colors ${
-            viewMode === 'map'
-              ? 'bg-black text-white'
-              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-          }`}
-        >
-          <MapIcon className="size-4" />
-          Map
-        </button>
+      <div className="flex justify-start mt-6 mb-8">
+        <div className="relative inline-flex items-center bg-gray-100 rounded-full p-0.5">
+          <div
+            className={`absolute top-0.5 bottom-0.5 w-[calc(50%-2px)] rounded-full bg-white transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] ${
+              viewMode === 'grid' ? 'left-0.5' : 'left-1/2'
+            }`}
+          />
+
+          <button
+            onClick={() => setViewMode('grid')}
+            className={`relative z-10 flex items-center justify-center px-4 py-1.5 rounded-full transition-colors duration-200 ${
+              viewMode === 'grid'
+                ? 'text-black'
+                : 'text-gray-400 hover:text-gray-600'
+            }`}
+            aria-label="Grid view"
+          >
+            <Grid className="size-4" />
+          </button>
+
+          <button
+            onClick={() => setViewMode('map')}
+            className={`relative z-10 flex items-center justify-center px-4 py-1.5 rounded-full transition-colors duration-200 ${
+              viewMode === 'map'
+                ? 'text-black'
+                : 'text-gray-400 hover:text-gray-600'
+            }`}
+            aria-label="Map view"
+          >
+            <MapIcon className="size-4" />
+          </button>
+        </div>
       </div>
 
       {/* Grid View */}
