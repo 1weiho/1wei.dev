@@ -8,10 +8,11 @@ import {
   MarkerContent,
   MarkerPopup,
   MapControls,
+  useMap,
 } from '@/components/ui/map'
 import { Grid, MapIcon, Maximize, X } from 'lucide-react'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 
 type ImageData = {
   path: string
@@ -118,55 +119,10 @@ export default function PhotoGallery({ images }: PhotoGalleryProps) {
         <div className="mt-8 h-[600px] rounded-lg overflow-hidden border">
           <Map center={calculateCenter()} zoom={4}>
             <MapControls showZoom showFullscreen />
-            {imagesWithLocation.map((image, index) => (
-              <MapMarker
-                key={index}
-                longitude={image.longitude!}
-                latitude={image.latitude!}
-              >
-                <MarkerContent>
-                  <div className="size-8 rounded-full overflow-hidden border-2 border-white shadow-lg cursor-pointer hover:scale-110 transition-transform">
-                    <Image
-                      src={image.path}
-                      alt={image.description}
-                      width={32}
-                      height={32}
-                      className="object-cover size-full"
-                    />
-                  </div>
-                </MarkerContent>
-                <MarkerPopup className="!p-0 !border-0 !bg-transparent !shadow-none w-[300px] focus:outline-none cursor-default">
-                  <div className="relative aspect-[4/3] w-full overflow-hidden rounded-sm shadow-2xl ring-4 ring-white group isolate">
-                    <Image
-                      fill
-                      src={image.path}
-                      alt={image.description}
-                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90" />
-
-                    <div className="absolute bottom-0 left-0 right-0 p-5 flex flex-col justify-end gap-1.5 text-white transform transition-transform duration-500 group-hover:translate-y-[-4px]">
-                      <div className="flex items-center justify-between opacity-80 mix-blend-screen">
-                        <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-white/90">
-                          {image.date.replace(/-/g, '.')}
-                        </span>
-                      </div>
-                      <h3 className="font-medium text-lg leading-tight tracking-wider text-white drop-shadow-md">
-                        {image.description}
-                      </h3>
-                    </div>
-
-                    <button
-                      onClick={() => setFullscreenImage(image)}
-                      className="absolute top-3 right-3 p-2 text-white/70 hover:text-white transition-colors opacity-0 group-hover:opacity-100"
-                      aria-label="View fullscreen"
-                    >
-                      <Maximize className="size-4 drop-shadow-md" />
-                    </button>
-                  </div>
-                </MarkerPopup>
-              </MapMarker>
-            ))}
+            <PhotoMarkers
+              images={imagesWithLocation}
+              onFullscreen={setFullscreenImage}
+            />
           </Map>
         </div>
       )}
@@ -203,5 +159,89 @@ export default function PhotoGallery({ images }: PhotoGalleryProps) {
         </div>
       )}
     </div>
+  )
+}
+
+function PhotoMarkers({
+  images,
+  onFullscreen,
+}: {
+  images: ImageData[]
+  onFullscreen: (image: ImageData) => void
+}) {
+  const { map } = useMap()
+
+  const handleMarkerClick = useCallback(
+    (image: ImageData) => {
+      if (!map) return
+
+      const container = map.getContainer()
+      const height = container.clientHeight
+
+      // Fly to the marker position
+      // padding.top = height/2 positions the target at 75% from top (y: 3/4)
+      map.flyTo({
+        center: [image.longitude!, image.latitude!],
+        zoom: 8,
+        padding: { top: height / 2 },
+        duration: 800,
+      })
+    },
+    [map],
+  )
+
+  return (
+    <>
+      {images.map((image, index) => (
+        <MapMarker
+          key={index}
+          longitude={image.longitude!}
+          latitude={image.latitude!}
+          onClick={() => handleMarkerClick(image)}
+        >
+          <MarkerContent>
+            <div className="size-8 rounded-full overflow-hidden border-2 border-white shadow-lg cursor-pointer hover:scale-110 transition-transform">
+              <Image
+                src={image.path}
+                alt={image.description}
+                width={32}
+                height={32}
+                className="object-cover size-full"
+              />
+            </div>
+          </MarkerContent>
+          <MarkerPopup className="!p-0 !border-0 !bg-transparent !shadow-none w-[300px] focus:outline-none cursor-default">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-sm shadow-2xl ring-4 ring-white group isolate">
+              <Image
+                fill
+                src={image.path}
+                alt={image.description}
+                className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90" />
+
+              <div className="absolute bottom-0 left-0 right-0 p-5 flex flex-col justify-end gap-1.5 text-white transform transition-transform duration-500 group-hover:translate-y-[-4px]">
+                <div className="flex items-center justify-between opacity-80 mix-blend-screen">
+                  <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-white/90">
+                    {image.date.replace(/-/g, '.')}
+                  </span>
+                </div>
+                <h3 className="font-medium text-lg leading-tight tracking-wider text-white drop-shadow-md">
+                  {image.description}
+                </h3>
+              </div>
+
+              <button
+                onClick={() => onFullscreen(image)}
+                className="absolute top-3 right-3 p-2 text-white/70 hover:text-white transition-colors opacity-0 group-hover:opacity-100"
+                aria-label="View fullscreen"
+              >
+                <Maximize className="size-4 drop-shadow-md" />
+              </button>
+            </div>
+          </MarkerPopup>
+        </MapMarker>
+      ))}
+    </>
   )
 }
