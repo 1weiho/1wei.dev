@@ -9,7 +9,7 @@ import {
   MarkerPopup,
   MapControls,
 } from '@/components/ui/map'
-import { Grid, MapIcon } from 'lucide-react'
+import { Grid, MapIcon, Maximize, X } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
 
@@ -27,6 +27,7 @@ type PhotoGalleryProps = {
 
 export default function PhotoGallery({ images }: PhotoGalleryProps) {
   const [viewMode, setViewMode] = useState<'grid' | 'map'>('grid')
+  const [fullscreenImage, setFullscreenImage] = useState<ImageData | null>(null)
 
   const imagesWithLocation = images.filter(
     (image) => image.latitude && image.longitude,
@@ -135,13 +136,20 @@ export default function PhotoGallery({ images }: PhotoGalleryProps) {
                   </div>
                 </MarkerContent>
                 <MarkerPopup className="p-0 w-64">
-                  <div className="relative h-48 overflow-hidden rounded-t-md">
+                  <div className="relative h-48 overflow-hidden rounded-t-md group">
                     <Image
                       fill
                       src={image.path}
                       alt={image.description}
                       className="object-cover"
                     />
+                    <button
+                      onClick={() => setFullscreenImage(image)}
+                      className="absolute bottom-2 right-2 p-1.5 rounded-md bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/70"
+                      aria-label="View fullscreen"
+                    >
+                      <Maximize className="size-4" />
+                    </button>
                   </div>
                   <div className="p-3 space-y-1">
                     <p className="font-medium text-sm">{image.description}</p>
@@ -153,6 +161,38 @@ export default function PhotoGallery({ images }: PhotoGalleryProps) {
               </MapMarker>
             ))}
           </Map>
+        </div>
+      )}
+
+      {/* Fullscreen Lightbox */}
+      {fullscreenImage && (
+        <div
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center animate-in fade-in-0 duration-200"
+          onClick={() => setFullscreenImage(null)}
+        >
+          <button
+            onClick={() => setFullscreenImage(null)}
+            className="absolute top-4 right-4 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+            aria-label="Close fullscreen"
+          >
+            <X className="size-6" />
+          </button>
+          <div
+            className="relative max-w-[90vw] max-h-[90vh]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Image
+              src={fullscreenImage.path}
+              alt={fullscreenImage.description}
+              width={1200}
+              height={1600}
+              className="max-w-full max-h-[90vh] object-contain"
+            />
+            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent text-white">
+              <p className="font-medium">{fullscreenImage.description}</p>
+              <p className="text-sm text-white/70">{fullscreenImage.date}</p>
+            </div>
+          </div>
         </div>
       )}
     </div>
