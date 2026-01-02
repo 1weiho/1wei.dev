@@ -93,5 +93,61 @@
     "date": "2025-06-08",
     "latitude": 22.9808,
     "longitude": 120.1543
+  },
+  {
+    "path": "/assets/photo/fxn-2025-09-05.jpeg",
+    "description": "Shirakawa-go",
+    "date": "2025-09-05",
+    "latitude": 36.2533,
+    "longitude": 136.9029
+  },
+  {
+    "path": "/assets/photo/fxn-2025-09-06.jpeg",
+    "description": "Inuyama Castle",
+    "date": "2025-09-06",
+    "latitude": 35.3861,
+    "longitude": 136.9378
+  },
+  {
+    "path": "/assets/photo/fxn-2025-09-07.jpeg",
+    "description": "Lego-built Tokyo",
+    "date": "2025-09-07",
+    "latitude": 35.0505,
+    "longitude": 136.8442
+  },
+  {
+    "path": "/assets/photo/fxn-2025-10-29.jpeg",
+    "description": "Mount Fuji at dusk",
+    "date": "2025-10-29",
+    "latitude": 35.4985,
+    "longitude": 138.7675
+  },
+  {
+    "path": "/assets/photo/fxn-2025-10-29-1.jpeg",
+    "description": "Sunset of Mount Fuji",
+    "date": "2025-10-29",
+    "latitude": 35.4984,
+    "longitude": 138.7675
+  },
+  {
+    "path": "/assets/photo/fxn-2025-10-29-2.jpeg",
+    "description": "Tokyo Tower",
+    "date": "2025-10-29",
+    "latitude": 35.6572,
+    "longitude": 139.7457
+  },
+  {
+    "path": "/assets/photo/fxn-2025-11-01.jpeg",
+    "description": "Asakusa Temple",
+    "date": "2025-11-01",
+    "latitude": 35.7109,
+    "longitude": 139.7964
+  },
+  {
+    "path": "/assets/photo/fxn-2025-12-10.jpeg",
+    "description": "so and so and so...",
+    "date": "2025-12-10",
+    "latitude": 24.1331,
+    "longitude": 120.6868
   }
 ]
