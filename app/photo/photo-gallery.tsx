@@ -135,27 +135,34 @@ export default function PhotoGallery({ images }: PhotoGalleryProps) {
                     />
                   </div>
                 </MarkerContent>
-                <MarkerPopup className="p-0 w-64">
-                  <div className="relative h-48 overflow-hidden rounded-t-md group">
+                <MarkerPopup className="!p-0 !border-0 !bg-transparent !shadow-none w-[300px] focus:outline-none cursor-default">
+                  <div className="relative aspect-[4/3] w-full overflow-hidden rounded-sm shadow-2xl ring-4 ring-white group isolate">
                     <Image
                       fill
                       src={image.path}
                       alt={image.description}
-                      className="object-cover"
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90" />
+
+                    <div className="absolute bottom-0 left-0 right-0 p-5 flex flex-col justify-end gap-1.5 text-white transform transition-transform duration-500 group-hover:translate-y-[-4px]">
+                      <div className="flex items-center justify-between opacity-80 mix-blend-screen">
+                        <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-white/90">
+                          {image.date.replace(/-/g, '.')}
+                        </span>
+                      </div>
+                      <h3 className="font-medium text-lg leading-tight tracking-wider text-white drop-shadow-md">
+                        {image.description}
+                      </h3>
+                    </div>
+
                     <button
                       onClick={() => setFullscreenImage(image)}
-                      className="absolute bottom-2 right-2 p-1.5 rounded-md bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/70"
+                      className="absolute top-3 right-3 p-2 text-white/70 hover:text-white transition-colors opacity-0 group-hover:opacity-100"
                       aria-label="View fullscreen"
                     >
-                      <Maximize className="size-4" />
+                      <Maximize className="size-4 drop-shadow-md" />
                     </button>
-                  </div>
-                  <div className="p-3 space-y-1">
-                    <p className="font-medium text-sm">{image.description}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {image.date}
-                    </p>
                   </div>
                 </MarkerPopup>
               </MapMarker>
