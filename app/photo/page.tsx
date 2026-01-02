@@ -1,9 +1,7 @@
 import images from './images.json'
-import GoogleMapUrl from '@/components/google-map-url'
-import { AspectRatio } from '@/components/ui/aspect-ratio'
+import PhotoGallery from './photo-gallery'
 import { generateOgImageUrl } from '@/lib/utils'
 import { Metadata } from 'next'
-import Image from 'next/image'
 
 export const metadata: Metadata = {
   title: 'Photo | Yiwei Ho',
@@ -23,31 +21,7 @@ const PhotoPage = () => {
         Some memories I want to cherish.
       </h2>
 
-      <div className="mt-12 md:mt-20 grid md:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-16">
-        {[...images].reverse().map((image, index) => (
-          <div key={index}>
-            <AspectRatio ratio={3 / 4}>
-              <Image
-                src={image.path}
-                alt={image.description}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
-                className="object-cover"
-                priority={index < 8}
-              />
-            </AspectRatio>
-            <div className="flex justify-between text-xs text-gray-500 mt-1">
-              <p>{image.date}</p>
-              {image.latitude && image.longitude && (
-                <GoogleMapUrl
-                  latitude={image.latitude}
-                  longitude={image.longitude}
-                />
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
+      <PhotoGallery images={images} />
     </div>
   )
 }

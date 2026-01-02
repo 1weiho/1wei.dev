@@ -61,6 +61,12 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
   }
+  .maplibregl-popup-content {
+    @apply rounded-none! bg-transparent! p-0! shadow-none!;
+  }
+  .maplibregl-popup-tip {
+    @apply hidden!;
+  }
 }
 
 @layer base {
