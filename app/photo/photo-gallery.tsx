@@ -52,9 +52,9 @@ export default function PhotoGallery({ images }: PhotoGalleryProps) {
     <div>
       {/* View Mode Toggle */}
       <div className="flex justify-start mt-6 mb-8">
-        <div className="relative inline-flex items-center bg-gray-100 rounded-full p-0.5">
+        <div className="relative inline-flex items-center rounded-full p-0.5">
           <div
-            className={`absolute top-0.5 bottom-0.5 w-[calc(50%-2px)] rounded-full bg-white transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] ${
+            className={`absolute top-0.5 bottom-0.5 w-[calc(50%-2px)] rounded-full bg-white shadow-sm transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] ${
               viewMode === 'grid' ? 'left-0.5' : 'left-1/2'
             }`}
           />
@@ -87,7 +87,7 @@ export default function PhotoGallery({ images }: PhotoGalleryProps) {
 
       {/* Grid View */}
       {viewMode === 'grid' && (
-        <div className="mt-12 md:mt-20 grid md:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-16">
+        <div className="mt-8 grid md:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-16">
           {[...images].reverse().map((image, index) => (
             <div key={index}>
               <AspectRatio ratio={3 / 4}>
