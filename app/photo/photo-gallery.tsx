@@ -182,11 +182,12 @@ function PhotoMarkers({
       const container = map.getContainer()
       const height = container.clientHeight
 
-      // Fly to the marker position
-      // padding.top = height/2 positions the target at 75% from top (y: 3/4)
+      const targetZoom = 8
+      const currentZoom = map.getZoom()
+
       map.flyTo({
         center: [image.longitude!, image.latitude!],
-        zoom: 8,
+        zoom: currentZoom > targetZoom ? currentZoom : targetZoom,
         padding: { top: height / 2 },
         duration: 800,
       })
