@@ -1,6 +1,5 @@
 'use client'
 
-import GoogleMapUrl from '@/components/google-map-url'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import {
   Map,
@@ -12,7 +11,7 @@ import {
 } from '@/components/ui/map'
 import { Grid, MapIcon, Maximize, X } from 'lucide-react'
 import Image from 'next/image'
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 
 type ImageData = {
   path: string
@@ -29,6 +28,14 @@ type PhotoGalleryProps = {
 export default function PhotoGallery({ images }: PhotoGalleryProps) {
   const [viewMode, setViewMode] = useState<'grid' | 'map'>('grid')
   const [fullscreenImage, setFullscreenImage] = useState<ImageData | null>(null)
+  const [pendingFocusImage, setPendingFocusImage] = useState<ImageData | null>(
+    null,
+  )
+
+  const handleLocationClick = (image: ImageData) => {
+    setPendingFocusImage(image)
+    setViewMode('map')
+  }
 
   const imagesWithLocation = images.filter(
     (image) => image.latitude && image.longitude,
@@ -103,10 +110,12 @@ export default function PhotoGallery({ images }: PhotoGalleryProps) {
               <div className="flex justify-between text-xs text-gray-500 mt-1">
                 <p>{image.date}</p>
                 {image.latitude && image.longitude && (
-                  <GoogleMapUrl
-                    latitude={image.latitude}
-                    longitude={image.longitude}
-                  />
+                  <button
+                    onClick={() => handleLocationClick(image)}
+                    className="hover:text-gray-700 hover:underline transition-colors"
+                  >
+                    {image.latitude},{image.longitude}
+                  </button>
                 )}
               </div>
             </div>
@@ -122,6 +131,8 @@ export default function PhotoGallery({ images }: PhotoGalleryProps) {
             <PhotoMarkers
               images={imagesWithLocation}
               onFullscreen={setFullscreenImage}
+              pendingFocusImage={pendingFocusImage}
+              onFocusHandled={() => setPendingFocusImage(null)}
             />
           </Map>
         </div>
@@ -165,9 +176,13 @@ export default function PhotoGallery({ images }: PhotoGalleryProps) {
 function PhotoMarkers({
   images,
   onFullscreen,
+  pendingFocusImage,
+  onFocusHandled,
 }: {
   images: ImageData[]
   onFullscreen: (image: ImageData) => void
+  pendingFocusImage: ImageData | null
+  onFocusHandled: () => void
 }) {
   const { map } = useMap()
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
@@ -199,6 +214,27 @@ function PhotoMarkers({
     },
     [map],
   )
+
+  // Handle focus from grid view
+  useEffect(() => {
+    if (!pendingFocusImage || !map) return
+
+    const index = images.findIndex(
+      (img) =>
+        img.latitude === pendingFocusImage.latitude &&
+        img.longitude === pendingFocusImage.longitude,
+    )
+
+    if (index !== -1) {
+      // Small delay to ensure map is ready
+      setTimeout(() => {
+        handleMarkerClick(pendingFocusImage, index)
+        onFocusHandled()
+      }, 100)
+    } else {
+      onFocusHandled()
+    }
+  }, [pendingFocusImage, map, images, handleMarkerClick, onFocusHandled])
 
   const activeImage = activeIndex !== null ? images[activeIndex] : null
 
