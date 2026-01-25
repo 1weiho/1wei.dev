@@ -1,4 +1,5 @@
 import ProjectItem from './project'
+import Findrink from '@/components/svg/findrink'
 import { Project } from '@/lib/type'
 
 const projects: Project[] = [
@@ -33,6 +34,13 @@ const projects: Project[] = [
       'A lightweight tool for testing and monitoring server actions in Next.js.',
     url: 'https://next-sandbox.1wei.dev/',
     category: 'npm-package',
+  },
+  {
+    title: 'Findrink',
+    description: 'A menu search platform for bubble tea brands in Taiwan.',
+    url: 'https://findrink.tw/',
+    category: 'website',
+    icon: Findrink,
   },
   // {
   //   title: 'rwdot',
