@@ -32,6 +32,20 @@ export default function PhotoGallery({ images }: PhotoGalleryProps) {
     null,
   )
 
+  // Close fullscreen preview on Esc key
+  useEffect(() => {
+    if (!fullscreenImage) return
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setFullscreenImage(null)
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [fullscreenImage])
+
   const handleLocationClick = (image: ImageData) => {
     setPendingFocusImage(image)
     setViewMode('map')
