@@ -8,3 +8,6 @@ node_modules
 # shadcn/ui
 components/ui
 components.json
+
+# Skills
+.agents/skills

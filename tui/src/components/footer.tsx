@@ -1,4 +1,4 @@
-import { type Theme } from "../theme"
+import { type Theme } from '../theme'
 
 export function Footer({
   theme,
@@ -9,9 +9,9 @@ export function Footer({
   activeTab: number
   readingPost: boolean
 }) {
-  let hints = "q quit │ ←→ switch tab │ ↑↓ select │ ⏎ open"
+  let hints = 'q quit │ ←→ switch tab │ ↑↓ select │ ⏎ open'
   if (activeTab === 1 && readingPost) {
-    hints = "q quit │ Esc back │ ↑↓ scroll"
+    hints = 'q quit │ Esc back │ ↑↓ scroll'
   }
 
   return (

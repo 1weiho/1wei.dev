@@ -6,8 +6,8 @@ export interface Post {
 
 export const posts: Post[] = [
   {
-    title: "Building My First Raycast AI Extension for GitLab",
-    date: "2025-09-21",
+    title: 'Building My First Raycast AI Extension for GitLab',
+    date: '2025-09-21',
     content: `Recently, my company upgraded everyone's laptops to MacBooks. I had been developing backend services on Ubuntu, but this change meant one exciting thing for me: I could finally use Raycast at work!
 
 Since we use a self-hosted GitLab instance, I started exploring the GitLab Raycast Extension. It blew me away with how polished and complete it already was. But I noticed one limitation — it wasn't yet an AI Extension. That meant I couldn't just ask, for example, "Summarize my work progress for the week" and let the AI handle it. That's when the idea struck me: why not build it myself and turn it into an AI-powered Extension?
@@ -43,8 +43,8 @@ Wrapping Up
 That's it! With just a few tools and some evals, I had turned a traditional Raycast Extension into an AI Extension that users can interact with naturally — making the GitLab integration much more powerful. The developer experience is honestly delightful, and I'm amazed at how easy Raycast makes it.`,
   },
   {
-    title: "Tokyo AI Hackathon",
-    date: "2025-11-22",
+    title: 'Tokyo AI Hackathon',
+    date: '2025-11-22',
     content: `Last month, Yen and I flew to Tokyo to join the Tokyo AI Hackathon, hosted by Raycast Community Japan. It was my first time traveling abroad for a community event, so the excitement was off the charts.
 
 We arrived early on the day of the event to meet Thomas, Pedro, and Stephanie at their hotel. After following Raycast for so long and only seeing them on X or YouTube, finally meeting them in person felt surreal, almost dreamlike.

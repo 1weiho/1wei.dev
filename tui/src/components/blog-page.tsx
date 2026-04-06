@@ -1,15 +1,15 @@
-import { useState } from "react"
-import { useKeyboard } from "@opentui/react"
-import { type Theme } from "../theme"
-import { posts, type Post } from "../data/posts"
+import { posts, type Post } from '../data/posts'
+import { type Theme } from '../theme'
+import { useKeyboard } from '@opentui/react'
+import { useState } from 'react'
 
 function PostDetail({ post, theme }: { post: Post; theme: Theme }) {
-  const paragraphs = post.content.split("\n\n")
+  const paragraphs = post.content.split('\n\n')
 
   return (
     <box flexDirection="column" paddingX={2} paddingTop={1}>
       <text>
-        <span fg={theme.fgMuted}>{"← Esc back"}</span>
+        <span fg={theme.fgMuted}>{'← Esc back'}</span>
       </text>
 
       <box marginTop={1}>
@@ -23,9 +23,9 @@ function PostDetail({ post, theme }: { post: Post; theme: Theme }) {
         {paragraphs.map((p, i) => {
           const isHeading =
             p === p.trim() &&
-            !p.includes(". ") &&
+            !p.includes('. ') &&
             p.length < 60 &&
-            !p.includes(",")
+            !p.includes(',')
           return (
             <box key={i} marginTop={1}>
               {isHeading ? (
@@ -56,19 +56,19 @@ export function BlogPage({
 
   useKeyboard((key) => {
     if (readingPost) {
-      if (key.name === "escape") {
+      if (key.name === 'escape') {
         onReadPost(null)
       }
       return
     }
 
-    if (key.name === "down" || key.name === "j") {
+    if (key.name === 'down' || key.name === 'j') {
       setSelected((s) => Math.min(s + 1, posts.length - 1))
     }
-    if (key.name === "up" || key.name === "k") {
+    if (key.name === 'up' || key.name === 'k') {
       setSelected((s) => Math.max(s - 1, 0))
     }
-    if (key.name === "enter" || key.name === "return") {
+    if (key.name === 'enter' || key.name === 'return') {
       onReadPost(posts[selected]!)
     }
   })
@@ -96,7 +96,9 @@ export function BlogPage({
           >
             <text fg={i === selected ? theme.fgBright : theme.fgMuted}>
               {i === selected ? (
-                <strong>{">"} {post.title}</strong>
+                <strong>
+                  {'>'} {post.title}
+                </strong>
               ) : (
                 `  ${post.title}`
               )}

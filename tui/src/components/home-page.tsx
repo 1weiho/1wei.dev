@@ -1,8 +1,8 @@
-import { useState } from "react"
-import { useKeyboard, useTerminalDimensions } from "@opentui/react"
-import { type Theme } from "../theme"
-import { projects } from "../data/projects"
-import { ProjectItem } from "./project-item"
+import { projects } from '../data/projects'
+import { type Theme } from '../theme'
+import { ProjectItem } from './project-item'
+import { useKeyboard, useTerminalDimensions } from '@opentui/react'
+import { useState } from 'react'
 
 export function HomePage({ theme, active }: { theme: Theme; active: boolean }) {
   const { width } = useTerminalDimensions()
@@ -11,24 +11,24 @@ export function HomePage({ theme, active }: { theme: Theme; active: boolean }) {
 
   useKeyboard((key) => {
     if (!active) return
-    if (key.name === "down" || key.name === "j") {
+    if (key.name === 'down' || key.name === 'j') {
       setSelected((s) => Math.min(s + 1, projects.length - 1))
     }
-    if (key.name === "up" || key.name === "k") {
+    if (key.name === 'up' || key.name === 'k') {
       setSelected((s) => Math.max(s - 1, 0))
     }
-    if (key.name === "enter" || key.name === "return") {
-      Bun.spawn(["open", projects[selected]!.url])
+    if (key.name === 'enter' || key.name === 'return') {
+      Bun.spawn(['open', projects[selected]!.url])
     }
   })
 
   return (
     <box flexDirection="column" paddingX={2} paddingTop={1}>
       <text fg={theme.fg}>
-        I am currently a backend developer at Microprogram, where we have built a
-        world-class public bike-sharing system in Taiwan. I have a passion for
-        exploring new frontend and backend technologies, and I am deeply inspired
-        by beautiful and innovative designs.
+        I am currently a backend developer at Microprogram, where we have built
+        a world-class public bike-sharing system in Taiwan. I have a passion for
+        exploring new frontend and backend technologies, and I am deeply
+        inspired by beautiful and innovative designs.
       </text>
 
       <box flexDirection="row" gap={4} marginTop={1}>
@@ -47,7 +47,7 @@ export function HomePage({ theme, active }: { theme: Theme; active: boolean }) {
       </box>
 
       <box marginY={1}>
-        <text fg={theme.border}>{"─".repeat(dividerWidth)}</text>
+        <text fg={theme.border}>{'─'.repeat(dividerWidth)}</text>
       </box>
 
       <text fg={theme.fgBright}>

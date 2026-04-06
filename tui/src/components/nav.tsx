@@ -1,14 +1,8 @@
-import { type Theme } from "../theme"
+import { type Theme } from '../theme'
 
-const tabs = ["Home", "Blog", "About"]
+const tabs = ['Home', 'Blog', 'About']
 
-export function Nav({
-  activeTab,
-  theme,
-}: {
-  activeTab: number
-  theme: Theme
-}) {
+export function Nav({ activeTab, theme }: { activeTab: number; theme: Theme }) {
   return (
     <box paddingX={2} paddingY={1} flexDirection="row" gap={3}>
       {tabs.map((tab, i) => (

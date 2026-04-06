@@ -1,13 +1,13 @@
-import { useState } from "react"
-import { useKeyboard, useRenderer } from "@opentui/react"
-import { getTheme } from "./theme"
-import { type Post } from "./data/posts"
-import { Header } from "./components/header"
-import { Nav } from "./components/nav"
-import { Footer } from "./components/footer"
-import { HomePage } from "./components/home-page"
-import { BlogPage } from "./components/blog-page"
-import { AboutPage } from "./components/about-page"
+import { AboutPage } from './components/about-page'
+import { BlogPage } from './components/blog-page'
+import { Footer } from './components/footer'
+import { Header } from './components/header'
+import { HomePage } from './components/home-page'
+import { Nav } from './components/nav'
+import { type Post } from './data/posts'
+import { getTheme } from './theme'
+import { useKeyboard, useRenderer } from '@opentui/react'
+import { useState } from 'react'
 
 export function App() {
   const renderer = useRenderer()
@@ -17,17 +17,17 @@ export function App() {
   const tabCount = 3
 
   useKeyboard((key) => {
-    if (key.name === "q" && !key.ctrl && !key.meta) {
+    if (key.name === 'q' && !key.ctrl && !key.meta) {
       renderer.destroy()
     }
-    if (key.ctrl && key.name === "c") {
+    if (key.ctrl && key.name === 'c') {
       renderer.destroy()
     }
     if (!readingPost) {
-      if (key.name === "left" || key.name === "h") {
+      if (key.name === 'left' || key.name === 'h') {
         setActiveTab((t) => (t - 1 + tabCount) % tabCount)
       }
-      if (key.name === "right" || key.name === "l") {
+      if (key.name === 'right' || key.name === 'l') {
         setActiveTab((t) => (t + 1) % tabCount)
       }
     }
