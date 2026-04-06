@@ -25,11 +25,9 @@ export function App() {
     }
     if (!readingPost) {
       if (key.name === "left" || key.name === "h") {
-        setReadingPost(null)
         setActiveTab((t) => (t - 1 + tabCount) % tabCount)
       }
       if (key.name === "right" || key.name === "l") {
-        setReadingPost(null)
         setActiveTab((t) => (t + 1) % tabCount)
       }
     }
@@ -40,7 +38,7 @@ export function App() {
       <Header theme={theme} />
       <Nav activeTab={activeTab} theme={theme} />
       <scrollbox flexGrow={1} focused={activeTab === 1 && !!readingPost}>
-        {activeTab === 0 && <HomePage theme={theme} />}
+        {activeTab === 0 && <HomePage theme={theme} active />}
         {activeTab === 1 && (
           <BlogPage
             theme={theme}
@@ -48,9 +46,9 @@ export function App() {
             onReadPost={setReadingPost}
           />
         )}
-        {activeTab === 2 && <AboutPage theme={theme} />}
+        {activeTab === 2 && <AboutPage theme={theme} active />}
       </scrollbox>
-      <Footer theme={theme} />
+      <Footer theme={theme} activeTab={activeTab} readingPost={!!readingPost} />
     </box>
   )
 }

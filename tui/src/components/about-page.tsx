@@ -38,10 +38,11 @@ function Clock({ theme }: { theme: Theme }) {
   )
 }
 
-export function AboutPage({ theme }: { theme: Theme }) {
+export function AboutPage({ theme, active }: { theme: Theme; active: boolean }) {
   const [selected, setSelected] = useState(0)
 
   useKeyboard((key) => {
+    if (!active) return
     if (key.name === "down" || key.name === "j") {
       setSelected((s) => Math.min(s + 1, links.length - 1))
     }

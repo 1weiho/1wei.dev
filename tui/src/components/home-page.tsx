@@ -4,12 +4,13 @@ import { type Theme } from "../theme"
 import { projects } from "../data/projects"
 import { ProjectItem } from "./project-item"
 
-export function HomePage({ theme }: { theme: Theme }) {
+export function HomePage({ theme, active }: { theme: Theme; active: boolean }) {
   const { width } = useTerminalDimensions()
   const dividerWidth = Math.max(width - 6, 20)
   const [selected, setSelected] = useState(0)
 
   useKeyboard((key) => {
+    if (!active) return
     if (key.name === "down" || key.name === "j") {
       setSelected((s) => Math.min(s + 1, projects.length - 1))
     }
