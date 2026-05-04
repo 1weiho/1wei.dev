@@ -1,5 +1,6 @@
 import ProjectItem from './project'
 import Findrink from '@/components/svg/findrink'
+import OpenSlide from '@/components/svg/open-slide'
 import { Project } from '@/lib/type'
 
 const projects: Project[] = [
@@ -9,6 +10,13 @@ const projects: Project[] = [
   //   url: 'https://gh-link.vercel.app/',
   //   category: 'next-js',
   // },
+  {
+    title: 'open-slide',
+    description: 'A slide framework built for agents.',
+    url: 'https://open-slide.dev/',
+    category: 'website',
+    icon: OpenSlide,
+  },
   {
     title: 'SVGL Raycast Extension',
     description: 'The Raycast extension to search SVG logos via svgl.',
