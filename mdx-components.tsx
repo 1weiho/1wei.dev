@@ -6,7 +6,7 @@ import type { MDXComponents } from 'mdx/types'
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     wrapper: ({ children }) => (
-      <article className="prose mx-auto my-20 md:my-28 tracking-tight prose-headings:font-[family-name:var(--font-instrument-serif)] prose-headings:text-4xl prose-headings:font-normal prose-p:my-6 prose-p:leading-7 prose-p:text-pretty md:prose-p:my-8 md:prose-p:leading-8">
+      <article className="prose mx-auto my-20 md:my-28 tracking-tight prose-headings:font-[family-name:var(--font-instrument-serif)] prose-headings:text-4xl prose-headings:font-normal prose-p:my-6 prose-p:leading-7 prose-p:text-pretty md:prose-p:my-8 md:prose-p:leading-8 prose-img:rounded-lg prose-img:ring-1 prose-img:ring-black/5 prose-hr:border-black/10">
         {children}
       </article>
     ),
@@ -62,7 +62,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
             target="_blank"
             rel="noopener noreferrer"
             {...props}
-            className="inline-flex items-baseline gap-1"
+            className="inline-flex items-baseline gap-1 decoration-black/30 underline-offset-[3px] transition-colors duration-300 hover:decoration-black"
           >
             <img
               src={`https://www.google.com/s2/favicons?domain=${domain}&sz=128`}
@@ -80,7 +80,14 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
           </a>
         )
       }
-      return <a target="_blank" rel="noopener noreferrer" {...props} />
+      return (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          {...props}
+          className="decoration-black/30 underline-offset-[3px] transition-colors duration-300 hover:decoration-black"
+        />
+      )
     },
     ...components,
   }

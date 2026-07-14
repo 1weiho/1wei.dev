@@ -25,7 +25,9 @@ const ProjectItem = ({
   return (
     <Link className="group block" href={url} target="_blank">
       <div className="flex gap-2 items-center">
-        <h3 className="text-black">{title}</h3>
+        <h3 className="text-black underline decoration-transparent decoration-1 underline-offset-4 transition-colors duration-300 group-hover:decoration-black/30">
+          {title}
+        </h3>
         {renderIcon()}
       </div>
       <p className="mt-2 text-xs md:text-sm">{description}</p>

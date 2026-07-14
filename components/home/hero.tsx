@@ -15,10 +15,15 @@ const Hero = () => {
             alt="Avatar"
             width={600}
             height={600}
-            className="rounded-full h-16 w-16 md:h-24 md:w-24"
+            className="rounded-full h-16 w-16 md:h-24 md:w-24 ring-1 ring-black/10"
           />
         </ViewTransition>
-        <h1 className="text-2xl md:text-3xl text-black">你好 👋</h1>
+        <h1 className="text-2xl md:text-3xl text-black">
+          你好{' '}
+          <span className="inline-block origin-[70%_70%] animate-[wave_1.6s_ease-in-out_0.4s_1] motion-reduce:animate-none">
+            👋
+          </span>
+        </h1>
       </div>
 
       <h2 className="mt-8 md:mt-16 text-3xl md:text-4xl text-black font-[family-name:var(--font-instrument-serif)]">

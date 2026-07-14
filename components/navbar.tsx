@@ -29,7 +29,10 @@ const Navbar = () => {
         <Link
           key={link.path}
           href={link.path}
-          className={cn(link.path === currentPathname && 'text-black')}
+          className={cn(
+            'transition-colors duration-300 hover:text-black',
+            link.path === currentPathname && 'text-black',
+          )}
         >
           {link.title}
         </Link>
@@ -37,10 +40,10 @@ const Navbar = () => {
       <Link
         href="https://links.1wei.dev"
         target="_blank"
-        className="flex items-center gap-1"
+        className="group flex items-center gap-1 transition-colors duration-300 hover:text-black"
       >
         Links
-        <ArrowUpRight className="size-4" />
+        <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
       </Link>
     </nav>
   )

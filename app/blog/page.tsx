@@ -38,7 +38,7 @@ const Blog = () => {
       <div className="mt-12 space-y-12">
         {years.map((year) => (
           <div key={year}>
-            <h3 className="text-4xl font-[family-name:var(--font-instrument-serif)]">
+            <h3 className="text-4xl text-black/30 font-[family-name:var(--font-instrument-serif)]">
               {year}
             </h3>
             <ul className="divide-y divide-black/10">

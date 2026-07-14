@@ -35,9 +35,8 @@ export default function CopyButton({ content, className }: CopyButtonProps) {
       aria-label={copied ? 'Copied' : 'Copy code'}
       data-copied={copied ? 'true' : 'false'}
       className={
-        'rounded-md border bg-white/70 px-2 py-1 text-xs font-medium text-gray-700 shadow-sm transition ' +
-        'hover:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 ' +
-        'dark:bg-black/40 dark:text-gray-200 dark:hover:bg-black/60 ' +
+        'rounded-md border border-black/10 bg-white/80 px-2 py-1 text-xs font-medium text-gray-600 shadow-xs backdrop-blur-sm transition-colors ' +
+        'hover:bg-white hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/60' +
         (className ? ' ' + className : '')
       }
     >

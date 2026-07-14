@@ -19,27 +19,21 @@ const UTC8Clock = ({ className }: UTC8ClockProps) => {
     return () => clearInterval(timer)
   }, [])
 
-  if (time === null) {
-    return (
-      <div className={className}>
-        <p className="text-xs">Loading...</p>
-      </div>
-    )
-  }
-
-  const formattedTime = new Intl.DateTimeFormat('en-US', {
-    timeZone: 'Asia/Taipei',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: false,
-  }).format(time)
+  const formattedTime = time
+    ? new Intl.DateTimeFormat('en-US', {
+        timeZone: 'Asia/Taipei',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false,
+      }).format(time)
+    : '--:--:--'
 
   return (
     <div className={className}>
       <div className="flex items-center text-xs space-x-2">
         <p className="font-semibold">UTC+8</p>
-        <p>{formattedTime}</p>
+        <p className="tabular-nums">{formattedTime}</p>
       </div>
     </div>
   )
