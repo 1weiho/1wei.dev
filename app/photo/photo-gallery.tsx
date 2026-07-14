@@ -125,7 +125,7 @@ export default function PhotoGallery({ images }: PhotoGalleryProps) {
 
       {/* Map View */}
       {viewMode === 'map' && (
-        <div className="mt-8 h-[600px] rounded-lg overflow-hidden border">
+        <div className="mt-8 h-[calc(100dvh-23.5rem)] md:h-[calc(100dvh-26.5rem)] min-h-[500px] rounded-lg overflow-hidden border">
           <Map center={calculateCenter()} zoom={4}>
             <MapControls showZoom showFullscreen />
             <PhotoMarkers
