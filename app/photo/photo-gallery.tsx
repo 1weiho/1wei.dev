@@ -59,7 +59,7 @@ export default function PhotoGallery({ images }: PhotoGalleryProps) {
     <div>
       {/* View Mode Toggle */}
       <div className="flex justify-start mt-6 mb-8">
-        <div className="relative inline-flex items-center rounded-full p-0.5">
+        <div className="relative inline-flex items-center rounded-full bg-black/5 p-0.5">
           <div
             className={`absolute top-0.5 bottom-0.5 w-[calc(50%-2px)] rounded-full bg-white shadow-sm transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] ${
               viewMode === 'grid' ? 'left-0.5' : 'left-1/2'
@@ -96,19 +96,19 @@ export default function PhotoGallery({ images }: PhotoGalleryProps) {
       {viewMode === 'grid' && (
         <div className="mt-8 grid md:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-16">
           {[...images].reverse().map((image, index) => (
-            <div key={index}>
-              <AspectRatio ratio={3 / 4}>
+            <div key={index} className="group">
+              <AspectRatio ratio={3 / 4} className="overflow-hidden">
                 <Image
                   src={image.path}
                   alt={image.description}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
-                  className="object-cover"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                   priority={index < 8}
                 />
               </AspectRatio>
               <div className="flex justify-between text-xs text-gray-500 mt-1">
-                <p>{image.date}</p>
+                <p className="tabular-nums">{image.date}</p>
                 {image.latitude && image.longitude && (
                   <button
                     onClick={() => handleLocationClick(image)}
@@ -125,7 +125,7 @@ export default function PhotoGallery({ images }: PhotoGalleryProps) {
 
       {/* Map View */}
       {viewMode === 'map' && (
-        <div className="mt-8 h-[600px] rounded-lg overflow-hidden border">
+        <div className="mt-8 h-[calc(100dvh-23.5rem)] md:h-[calc(100dvh-26.5rem)] min-h-[500px] rounded-lg overflow-hidden border">
           <Map center={calculateCenter()} zoom={4}>
             <MapControls showZoom showFullscreen />
             <PhotoMarkers

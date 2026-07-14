@@ -176,8 +176,45 @@
   * {
     @apply border-border;
   }
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
   body {
     @apply bg-background text-foreground;
+  }
+  ::selection {
+    background-color: hsl(45 96% 84%);
+    color: hsl(0 0% 15%);
+  }
+  :focus-visible {
+    outline: 2px solid hsl(43 90% 55% / 0.7);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+@keyframes wave {
+  0% {
+    transform: rotate(0deg);
+  }
+  15% {
+    transform: rotate(16deg);
+  }
+  30% {
+    transform: rotate(-8deg);
+  }
+  45% {
+    transform: rotate(14deg);
+  }
+  60% {
+    transform: rotate(-4deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(0deg);
   }
 }
 

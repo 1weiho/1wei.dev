@@ -2,7 +2,7 @@ import './globals.css'
 import LightRay from '@/components/light-ray'
 import Navbar from '@/components/navbar'
 import { Analytics } from '@vercel/analytics/next'
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono, Instrument_Serif } from 'next/font/google'
 
 const geistSans = Geist({
@@ -41,6 +41,10 @@ export const metadata: Metadata = {
     creator: '@1weiho',
   },
   metadataBase: new URL('https://1wei.dev'),
+}
+
+export const viewport: Viewport = {
+  themeColor: '#fffcef',
 }
 
 export default function RootLayout({
