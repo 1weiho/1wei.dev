@@ -15,6 +15,10 @@ const links = [
     title: 'Blog',
   },
   {
+    path: '/talk',
+    title: 'Talk',
+  },
+  {
     path: '/photo',
     title: 'Photo',
   },
