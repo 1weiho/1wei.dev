@@ -11,3 +11,10 @@ export interface Post {
   title: string
   date: string
 }
+
+export interface Talk {
+  title: string
+  slidesUrl: string
+  videoUrl: string
+  date: string
+}
