@@ -80,7 +80,7 @@ const Navbar = () => {
         className={cn(
           'absolute inset-y-0 rounded-full bg-black/[0.05] motion-reduce:transition-none',
           ready &&
-            'transition-[left,width,opacity] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]',
+            'transition-[left,width,opacity] duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]',
           ghost ? 'opacity-100' : 'opacity-0',
         )}
         style={{
