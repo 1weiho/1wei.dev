@@ -1,0 +1,153 @@
+import { generateOgImageUrl } from '@/lib/utils'
+
+export const metadata = {
+  title: 'Why I built open-slide',
+  description:
+    'How an idea on a scooter ride home became an open-source presentation framework for coding agents.',
+  openGraph: {
+    title: 'Why I built open-slide',
+    description:
+      'How an idea on a scooter ride home became an open-source presentation framework for coding agents.',
+    images: [
+      {
+        url: generateOgImageUrl('Why I built open-slide'),
+        alt: 'Why I built open-slide',
+      },
+    ],
+  },
+}
+
+## Why I built open-slide
+
+In April 2026, I went to a Cursor meetup in Taichung. Several speakers had used coding agents to generate their presentations as HTML. The results were impressive: custom layouts, interactive demos, and visuals that would have been difficult to produce in a traditional slide editor.
+
+But on my scooter ride home, I kept thinking about everything the agents had to build before they could make a single useful slide.
+
+Every generated deck needed its own navigation, keyboard controls, progress indicator, presentation mode, and page structure. Because each one started from scratch, the interface changed from deck to deck. And after making a few of them, you ended up with standalone HTML files scattered across different folders, each with its own little implementation of the same presentation software.
+
+The agent was spending a surprising amount of its context and tokens rebuilding the player instead of designing the presentation.
+
+That ride home left me with a question: what if the presentation framework already existed, and the agent only had to create the part the audience sees?
+
+That question became [open-slide](https://github.com/1weiho/open-slide).
+
+### The problem was not HTML
+
+HTML is a great medium for presentations. It is flexible, interactive, easy to deploy, and able to contain real software instead of a screenshot of software. The problem was asking an agent to recreate the entire presentation environment every time.
+
+Most AI presentation products take a different approach. They start with templates, generate copy, and place that copy into predetermined layouts. This makes it possible to produce a polished deck quickly, but it also puts a ceiling on what the deck can become. The output often feels like a variation of the same document: different words, familiar structure.
+
+I wanted the speed of AI generation without giving up the freedom of code.
+
+The key idea behind open-slide is simple: a presentation is visual code, and coding agents are already good at writing code. Instead of asking an agent to choose among templates, open-slide gives it a constrained React canvas and a runtime. The runtime handles the repetitive infrastructure; the agent is free to design the actual pages.
+
+This changes the division of labor:
+
+- open-slide owns navigation, playback, thumbnails, scaling, transitions, and the presentation UI.
+- The agent owns hierarchy, layout, typography, illustration, motion, and the way information is communicated.
+
+The constraints still matter. Every page uses a fixed 1920 × 1080 canvas. A deck has a predictable file structure. Assets live next to the deck that uses them. But inside that frame, every slide is just a React component. It can be a static composition, an animated sequence, an interactive diagram, or a live product demo.
+
+The goal is not to remove structure. It is to put structure in the right layer.
+
+### A workspace, not another generated file
+
+My first prompt described something close to the system that exists today. I wanted a workspace with a `slides` directory, one folder per deck, an `index.tsx` entry file, and a local `assets` folder. I also wanted a small web app that could show every deck in the workspace.
+
+Three product requirements mattered from the beginning.
+
+First, the player had to be consistent. A presenter should not have to learn a new set of controls every time an agent generates a deck. Page navigation, thumbnails, fullscreen playback, and preview behavior belong to the framework.
+
+Second, assets had to be first-class. Images, videos, icons, and fonts are not secondary details in a presentation; they are part of the work. I wanted a proper asset manager instead of a collection of mysterious file paths copied into generated code.
+
+Third, multiple presentations had to live together. Creating a deck should mean adding a folder, not initializing another project. A workspace makes decks easier to find, reuse, update, and deploy.
+
+The first prototype produced by Claude Code was surprisingly close to what I had imagined. It had a React app, a player, a presentation canvas, a sidebar, and a small library for the core presentation behavior. The architecture later moved into an npm package, but the original model held up: the framework provides the stage, and each deck provides the performance.
+
+That early result taught me something important about building with agents. A clear boundary is often more valuable than a highly detailed specification. Once the agent knew which responsibilities belonged to the runtime and which belonged to the generated deck, it could make good implementation decisions inside that boundary.
+
+### Built for agents, not merely built with them
+
+There is a difference between a tool created with AI and a tool designed for AI to use.
+
+An agent does not automatically know the conventions of a new framework. It might write valid React and still create a poor presentation: text that is too small, layouts that only work in the browser viewport, assets stored in the wrong place, or animations that break when moving backward through a deck.
+
+That is why open-slide is “skills first.” The framework ships with instructions that teach coding agents how to work within it:
+
+- `create-slide` guides the agent from a topic to a coherent deck.
+- `slide-authoring` explains the technical contract, layout system, assets, transitions, and presentation-specific design rules.
+- `apply-comments` turns feedback left in the inspector into a focused editing workflow.
+
+The skills are versioned with the framework and can be updated as the APIs and best practices evolve. This is as important as the runtime itself. The code gives agents capabilities; the skills give them judgment about how to use those capabilities.
+
+It also makes iteration feel natural. I can ask an agent to create a first draft, inspect the rendered slides, leave comments on several elements, and then ask it to apply all of that feedback. The source remains ordinary React, so I can make a direct edit whenever that is faster. There is no hidden document format and no one-way generation step.
+
+The presentation becomes a shared workspace between the human and the agent.
+
+### When the slide is real software
+
+One of my favorite examples of what this model enables came from Sam Lambert, the CEO of PlanetScale. At Cursor Compile 2026, he used open-slide for a presentation that included a live database-sharding demo directly in the deck.
+
+That is much more interesting than putting a screenshot of a terminal on a slide. Because the presentation is React, the demo and the explanation can exist in the same visual system. A state change can update the diagram the audience is looking at. A transition can carry an object from a conceptual overview into a live interface. The deck does not need to pretend to be software; it can actually be software.
+
+This is the kind of design freedom I did not want to lose to template-based generation.
+
+open-slide includes primitives for progressive reveals, page transitions, and morph transitions, but they are intentionally primitives rather than finished visual styles. The framework gives the agent a vocabulary. It does not force every presentation to speak with the same voice.
+
+### Shipping changed the project
+
+I did not begin open-slide with a roadmap for building a popular open-source project. I had an idea on a scooter, wrote it down, and started testing it.
+
+Then I shared the work.
+
+I posted the first release on X. After that, I kept posting small features: image placeholders, global assets, step animations, morph transitions, and improvements to the authoring workflow. When a new model such as Opus 5 came out, I used open-slide to test what it could do and shared the resulting deck. That connected the project to conversations people were already having, while still showing the product honestly.
+
+Within the first week, open-slide reached GitHub Trending. By the time I gave my COSCUP 2026 talk, it had passed 6,000 GitHub stars and was attracting a growing group of contributors. I also began seeing it used at events I had nothing to do with.
+
+None of that happened simply because the repository existed.
+
+Building in public gave people repeated chances to understand the project. Threads helped me connect with the local developer community in Taiwan. X helped the project reach developers and open-source maintainers around the world. Sharing in English was uncomfortable at first, but it created conversations, issues, pull requests, and relationships that would not have happened if I had waited until my English—or the product—felt perfect.
+
+Promotion is not separate from building. For an open-source project, it is how the work meets its community.
+
+### Four lessons I am taking with me
+
+Building open-slide reinforced four habits that I want to carry into future projects.
+
+#### 1. Capture every idea
+
+Small ideas disappear quickly. Write them down before deciding whether they are good. The note from a scooter ride became a working prototype because it survived long enough to be tested.
+
+AI makes this more valuable, not less. The cost of turning an idea into something you can evaluate has dropped dramatically. A rough thought no longer needs to become a complete plan before you can learn from it.
+
+#### 2. Build before you overthink
+
+Thinking feels safe because nothing has failed yet. Building creates friction, but friction produces information. The first version will reveal problems that no amount of planning could predict.
+
+Start, get stuck, adjust, and continue. Each step is progress.
+
+#### 3. Help the work get seen
+
+A good project can remain invisible if nobody talks about it. Share the first version. Share the tiny feature. Share what failed and what changed. Do it in places where the people you want to learn from already spend time.
+
+The goal is not to manufacture attention. It is to make the work available for discovery, feedback, and use.
+
+#### 4. Do not be afraid to communicate in English
+
+My English is not perfect. It does not need to be.
+
+A short post can reach a future contributor. A thoughtful issue can start a collaboration. A pull request to a project you admire can become an introduction to its maintainer. Open source is full of these small doors, and language should not stop us from trying to open them.
+
+### What I am really building
+
+open-slide started as a way to stop agents from wasting tokens on presentation plumbing. It has grown into a larger experiment about creative tools for agents.
+
+I do not want AI to make every presentation look the same. I want it to help more people turn an idea into a visual experience that feels intentional, specific, and alive. That requires more than generation. It requires a good runtime, a clear contract, useful primitives, durable source code, and a workflow where human taste can guide each iteration.
+
+That is what I am trying to build with open-slide: not a machine that finishes the presentation for you, but a medium in which you and an agent can make a better one together.
+
+If you have an idea that has been sitting in your notes, build the first version. It does not need to begin with a perfect roadmap. Sometimes it begins on the ride home.
+
+---
+
+This post is adapted from my COSCUP 2026 talk, [“open-slide: From an idea on a scooter to GitHub Trending”](https://coscup.org/2026/session/JTPCAZ/). You can [view the slides](https://slides.1wei.dev/s/coscup-2026), [watch the recording](https://www.youtube.com/watch?v=BWgFrY91F_I), or [explore open-slide on GitHub](https://github.com/1weiho/open-slide).
