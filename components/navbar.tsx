@@ -71,7 +71,7 @@ const Navbar = () => {
   return (
     <nav
       ref={navRef}
-      className="relative mt-12 -ml-3 flex items-center gap-1 md:gap-3"
+      className="relative mt-12 -ml-2.5 flex items-center gap-0.5 text-sm md:-ml-3 md:gap-3 md:text-base"
       onMouseLeave={() => setHoveredKey(null)}
     >
       {/* Sliding ghost highlight */}
@@ -101,7 +101,7 @@ const Navbar = () => {
           onFocus={() => setHoveredKey(link.path)}
           onBlur={() => setHoveredKey(null)}
           className={cn(
-            'relative rounded-full px-3 py-1.5 transition-colors duration-300 hover:text-black',
+            'relative rounded-full px-2.5 py-1.5 transition-colors duration-300 hover:text-black md:px-3',
             link.path === currentPathname && 'text-black',
           )}
         >
@@ -117,10 +117,10 @@ const Navbar = () => {
         onMouseEnter={() => setHoveredKey('links')}
         onFocus={() => setHoveredKey('links')}
         onBlur={() => setHoveredKey(null)}
-        className="group relative flex items-center gap-1 rounded-full px-3 py-1.5 transition-colors duration-300 hover:text-black"
+        className="group relative flex items-center gap-1 rounded-full px-2.5 py-1.5 transition-colors duration-300 hover:text-black md:px-3"
       >
         Links
-        <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+        <ArrowUpRight className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 md:size-4" />
       </Link>
     </nav>
   )
