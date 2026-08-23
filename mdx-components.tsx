@@ -46,9 +46,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
           {...props}
           className="relative rounded-md px-[0.4em] py-[0.2em] font-mono text-[0.9em] font-medium before:content-none after:content-none border"
           style={{
-            backgroundColor: 'hsl(48deg, 100%, 96.1%)',
-            borderColor: 'hsl(47, 84%, 90%)',
-            color: 'hsl(0, 0%, 31%)',
+            backgroundColor: 'hsl(0 0% 97%)',
+            borderColor: 'hsl(0 0% 89%)',
+            color: 'hsl(0 0% 20%)',
           }}
         />
       )
@@ -69,7 +69,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
               alt={`Favicon of ${domain}`}
               width={16}
               height={16}
-              className="inline-block align-baseline flex-shrink-0 rounded-sm"
+              className="inline-block align-baseline flex-shrink-0 rounded-sm grayscale"
               style={{
                 marginTop: 0,
                 marginBottom: 0,

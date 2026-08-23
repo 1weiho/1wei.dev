@@ -27,28 +27,45 @@ export async function GET(request: NextRequest) {
           height: '100%',
           width: '100%',
           display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-start',
-          justifyContent: 'center',
-          backgroundImage: 'url(https://1wei.dev/assets/og-bg.png)',
+          backgroundColor: '#ffffff',
+          padding: 40,
         }}
       >
         <div
           style={{
-            marginLeft: 100,
-            marginRight: 205,
-            marginBottom: 120,
+            flex: 1,
             display: 'flex',
-            fontSize: 80,
-            letterSpacing: '-0.025em',
-            fontStyle: 'normal',
-            color: '#4F4F4F',
-            lineHeight: '110px',
-            whiteSpace: 'pre-wrap',
-            fontFamily: 'Instrument Serif',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            border: '1px solid #d4d4d4',
+            padding: '60px 60px 48px',
           }}
         >
-          {title}
+          <div
+            style={{
+              display: 'flex',
+              fontSize: 80,
+              letterSpacing: '-0.025em',
+              fontStyle: 'normal',
+              color: '#111111',
+              lineHeight: '104px',
+              whiteSpace: 'pre-wrap',
+              fontFamily: 'Instrument Serif',
+              maxWidth: 900,
+            }}
+          >
+            {title}
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              fontSize: 30,
+              color: '#737373',
+              fontFamily: 'Instrument Serif',
+            }}
+          >
+            1wei.dev
+          </div>
         </div>
       </div>
     ),
@@ -58,7 +75,10 @@ export async function GET(request: NextRequest) {
       fonts: [
         {
           name: 'Instrument Serif',
-          data: await loadGoogleFont('Instrument Serif', title ?? ''),
+          data: await loadGoogleFont(
+            'Instrument Serif',
+            (title ?? '') + '1wei.dev',
+          ),
           style: 'normal',
         },
       ],

@@ -5,7 +5,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear()
 
   return (
-    <div className="flex justify-center items-center space-x-4 py-8 text-sm md:text-base">
+    <div className="flex justify-center items-center space-x-4 border-t border-black/10 py-8 text-sm md:text-base">
       <p>1wei.dev © {currentYear}</p>
       <Link
         href="https://github.com/1weiho/1wei.dev"
