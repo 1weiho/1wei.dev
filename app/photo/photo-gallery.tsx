@@ -61,7 +61,7 @@ export default function PhotoGallery({ images }: PhotoGalleryProps) {
       <div className="flex justify-start mt-6 mb-8">
         <div className="relative inline-flex items-center rounded-full bg-black/5 p-0.5">
           <div
-            className={`absolute top-0.5 bottom-0.5 w-[calc(50%-2px)] rounded-full bg-white shadow-sm transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] ${
+            className={`absolute top-0.5 bottom-0.5 w-[calc(50%-2px)] rounded-full bg-white shadow-sm ring-1 ring-black/10 transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] ${
               viewMode === 'grid' ? 'left-0.5' : 'left-1/2'
             }`}
           />

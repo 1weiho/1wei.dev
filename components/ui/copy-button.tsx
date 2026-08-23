@@ -36,7 +36,7 @@ export default function CopyButton({ content, className }: CopyButtonProps) {
       data-copied={copied ? 'true' : 'false'}
       className={
         'rounded-md border border-black/10 bg-white/80 px-2 py-1 text-xs font-medium text-gray-600 shadow-xs backdrop-blur-sm transition-colors ' +
-        'hover:bg-white hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/60' +
+        'hover:bg-white hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30' +
         (className ? ' ' + className : '')
       }
     >

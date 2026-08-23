@@ -9,7 +9,7 @@ export type HighlightOptions = {
 export async function highlightToHtml({
   code,
   lang = 'tsx',
-  theme = 'vitesse-light',
+  theme = 'min-light',
 }: HighlightOptions) {
   // Shiki v3: directly use codeToHtml, which lazy-loads grammars/themes as needed
   return await codeToHtml(code, { lang, theme })

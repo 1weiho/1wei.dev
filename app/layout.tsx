@@ -1,5 +1,4 @@
 import './globals.css'
-import LightRay from '@/components/light-ray'
 import Navbar from '@/components/navbar'
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
@@ -44,7 +43,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#fffcef',
+  themeColor: '#ffffff',
 }
 
 export default function RootLayout({
@@ -57,7 +56,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} antialiased`}
       >
-        <LightRay />
         <div className="container mx-auto font-[family-name:var(--font-geist-mono)] px-6">
           <Navbar />
           {children}
