@@ -69,7 +69,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
               alt={`Favicon of ${domain}`}
               width={16}
               height={16}
-              className="inline-block align-baseline flex-shrink-0 rounded-sm grayscale"
+              className="inline-block align-baseline flex-shrink-0 rounded-sm"
               style={{
                 marginTop: 0,
                 marginBottom: 0,
