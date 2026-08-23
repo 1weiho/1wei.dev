@@ -102,7 +102,7 @@ const Earth = () => {
     <div
       style={{
         width: '100%',
-        maxWidth: 400,
+        maxWidth: 560,
         aspectRatio: '1 / 1',
         position: 'relative',
       }}
