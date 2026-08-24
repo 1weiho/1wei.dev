@@ -18,7 +18,8 @@ async function loadGoogleFont(font: string, text: string) {
 
 export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl
-  const title = searchParams.get('title')
+  const title = searchParams.get('title') ?? '1wei.dev'
+  const monoText = '1wei.devFULL STACK DEVELOPER '
 
   return new ImageResponse(
     (
@@ -27,7 +28,7 @@ export async function GET(request: NextRequest) {
           height: '100%',
           width: '100%',
           display: 'flex',
-          backgroundColor: '#ffffff',
+          backgroundColor: '#0a0a0a',
           padding: 40,
         }}
       >
@@ -37,34 +38,53 @@ export async function GET(request: NextRequest) {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
-            border: '1px solid #d4d4d4',
-            padding: '60px 60px 48px',
+            border: '1px solid #262626',
+            padding: '52px 60px',
           }}
         >
           <div
             style={{
               display: 'flex',
-              fontSize: 80,
-              letterSpacing: '-0.025em',
-              fontStyle: 'normal',
-              color: '#111111',
-              lineHeight: '104px',
-              whiteSpace: 'pre-wrap',
-              fontFamily: 'Instrument Serif',
-              maxWidth: 900,
+              alignItems: 'center',
+              justifyContent: 'space-between',
             }}
           >
-            {title}
+            <div
+              style={{
+                display: 'flex',
+                fontSize: 26,
+                color: '#fafafa',
+                fontFamily: 'Geist Mono',
+                letterSpacing: '0.1em',
+              }}
+            >
+              1wei.dev
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                fontSize: 22,
+                color: '#525252',
+                fontFamily: 'Geist Mono',
+                letterSpacing: '0.2em',
+              }}
+            >
+              FULL STACK DEVELOPER
+            </div>
           </div>
           <div
             style={{
               display: 'flex',
-              fontSize: 30,
-              color: '#737373',
+              fontSize: 92,
+              letterSpacing: '-0.02em',
+              color: '#fafafa',
+              lineHeight: 1.1,
+              whiteSpace: 'pre-wrap',
               fontFamily: 'Instrument Serif',
+              maxWidth: 960,
             }}
           >
-            1wei.dev
+            {title}
           </div>
         </div>
       </div>
@@ -75,10 +95,12 @@ export async function GET(request: NextRequest) {
       fonts: [
         {
           name: 'Instrument Serif',
-          data: await loadGoogleFont(
-            'Instrument Serif',
-            (title ?? '') + '1wei.dev',
-          ),
+          data: await loadGoogleFont('Instrument Serif', title),
+          style: 'normal',
+        },
+        {
+          name: 'Geist Mono',
+          data: await loadGoogleFont('Geist+Mono', monoText),
           style: 'normal',
         },
       ],
