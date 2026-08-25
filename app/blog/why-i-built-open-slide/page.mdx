@@ -1,13 +1,14 @@
 import { generateOgImageUrl } from '@/lib/utils'
+import YouTubeEmbed from '@/components/youtube-embed'
 
 export const metadata = {
   title: 'Why I built open-slide',
   description:
-    'How an idea on a scooter ride home became an open-source presentation framework for coding agents.',
+    'How an idea on the way home after an event became an open-source presentation framework for coding agents.',
   openGraph: {
     title: 'Why I built open-slide',
     description:
-      'How an idea on a scooter ride home became an open-source presentation framework for coding agents.',
+      'How an idea on the way home after an event became an open-source presentation framework for coding agents.',
     images: [
       {
         url: generateOgImageUrl('Why I built open-slide'),
@@ -21,13 +22,13 @@ export const metadata = {
 
 In April 2026, I went to a Cursor meetup in Taichung. Several speakers had used coding agents to generate their presentations as HTML. The results were impressive: custom layouts, interactive demos, and visuals that would have been difficult to produce in a traditional slide editor.
 
-But on my scooter ride home, I kept thinking about everything the agents had to build before they could make a single useful slide.
+But on my way home after the event, I kept thinking about everything the agents had to build before they could make a single useful slide.
 
 Every generated deck needed its own navigation, keyboard controls, progress indicator, presentation mode, and page structure. Because each one started from scratch, the interface changed from deck to deck. And after making a few of them, you ended up with standalone HTML files scattered across different folders, each with its own little implementation of the same presentation software.
 
 The agent was spending a surprising amount of its context and tokens rebuilding the player instead of designing the presentation.
 
-That ride home left me with a question: what if the presentation framework already existed, and the agent only had to create the part the audience sees?
+That led me to a question: what if the presentation framework already existed, and the agent only had to create the part the audience sees?
 
 That question became [open-slide](https://github.com/1weiho/open-slide).
 
@@ -62,6 +63,8 @@ Second, assets had to be first-class. Images, videos, icons, and fonts are not s
 
 Third, multiple presentations had to live together. Creating a deck should mean adding a folder, not initializing another project. A workspace makes decks easier to find, reuse, update, and deploy.
 
+![The first version of open-slide](/assets/blog/why-i-built-open-slide/first-version.webp)
+
 The first prototype produced by Claude Code was surprisingly close to what I had imagined. It had a React app, a player, a presentation canvas, a sidebar, and a small library for the core presentation behavior. The architecture later moved into an npm package, but the original model held up: the framework provides the stage, and each deck provides the performance.
 
 That early result taught me something important about building with agents. A clear boundary is often more valuable than a highly detailed specification. Once the agent knew which responsibilities belonged to the runtime and which belonged to the generated deck, it could make good implementation decisions inside that boundary.
@@ -71,6 +74,8 @@ That early result taught me something important about building with agents. A cl
 There is a difference between a tool created with AI and a tool designed for AI to use.
 
 An agent does not automatically know the conventions of a new framework. It might write valid React and still create a poor presentation: text that is too small, layouts that only work in the browser viewport, assets stored in the wrong place, or animations that break when moving backward through a deck.
+
+![The create-slide skill](/assets/blog/why-i-built-open-slide/create-slide-skill.png)
 
 That is why open-slide is “skills first.” The framework ships with instructions that teach coding agents how to work within it:
 
@@ -88,6 +93,11 @@ The presentation becomes a shared workspace between the human and the agent.
 
 One of my favorite examples of what this model enables came from Sam Lambert, the CEO of PlanetScale. At Cursor Compile 2026, he used open-slide for a presentation that included a live database-sharding demo directly in the deck.
 
+<YouTubeEmbed
+  id="zxvyO5vnknI"
+  title="Sam Lambert's open-slide presentation at Cursor Compile 2026"
+/>
+
 That is much more interesting than putting a screenshot of a terminal on a slide. Because the presentation is React, the demo and the explanation can exist in the same visual system. A state change can update the diagram the audience is looking at. A transition can carry an object from a conceptual overview into a live interface. The deck does not need to pretend to be software; it can actually be software.
 
 This is the kind of design freedom I did not want to lose to template-based generation.
@@ -96,7 +106,7 @@ open-slide includes primitives for progressive reveals, page transitions, and mo
 
 ### Shipping changed the project
 
-I did not begin open-slide with a roadmap for building a popular open-source project. I had an idea on a scooter, wrote it down, and started testing it.
+I did not begin open-slide with a roadmap for building a popular open-source project. I had an idea on my way home after an event, wrote it down, and started testing it.
 
 Then I shared the work.
 
@@ -116,7 +126,7 @@ Building open-slide reinforced four habits that I want to carry into future proj
 
 #### 1. Capture every idea
 
-Small ideas disappear quickly. Write them down before deciding whether they are good. The note from a scooter ride became a working prototype because it survived long enough to be tested.
+Small ideas disappear quickly. Write them down before deciding whether they are good. The note I wrote on my way home became a working prototype because it survived long enough to be tested.
 
 AI makes this more valuable, not less. The cost of turning an idea into something you can evaluate has dropped dramatically. A rough thought no longer needs to become a complete plan before you can learn from it.
 
@@ -146,8 +156,8 @@ I do not want AI to make every presentation look the same. I want it to help mor
 
 That is what I am trying to build with open-slide: not a machine that finishes the presentation for you, but a medium in which you and an agent can make a better one together.
 
-If you have an idea that has been sitting in your notes, build the first version. It does not need to begin with a perfect roadmap. Sometimes it begins on the ride home.
+If you have an idea that has been sitting in your notes, build the first version. It does not need to begin with a perfect roadmap. Sometimes it begins on the way home.
 
 ---
 
-This post is adapted from my COSCUP 2026 talk, [“open-slide: From an idea on a scooter to GitHub Trending”](https://coscup.org/2026/session/JTPCAZ/). You can [view the slides](https://slides.1wei.dev/s/coscup-2026), [watch the recording](https://www.youtube.com/watch?v=BWgFrY91F_I), or [explore open-slide on GitHub](https://github.com/1weiho/open-slide).
+This post is adapted from my COSCUP 2026 talk. You can [view the slides](https://slides.1wei.dev/s/coscup-2026), [watch the recording](https://www.youtube.com/watch?v=BWgFrY91F_I), or [explore open-slide on GitHub](https://github.com/1weiho/open-slide).
