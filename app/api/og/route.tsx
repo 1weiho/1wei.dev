@@ -19,7 +19,8 @@ async function loadGoogleFont(font: string, text: string) {
 export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl
   const title = searchParams.get('title') ?? '1wei.dev'
-  const monoText = '1wei.devFULL STACK DEVELOPER '
+  const monoText = '1wei.devYiwei Ho '
+  const avatarSrc = new URL('/assets/avatar-og.jpeg', request.url).toString()
 
   return new ImageResponse(
     (
@@ -63,13 +64,35 @@ export async function GET(request: NextRequest) {
             <div
               style={{
                 display: 'flex',
-                fontSize: 22,
-                color: '#525252',
-                fontFamily: 'Geist Mono',
-                letterSpacing: '0.2em',
+                alignItems: 'center',
+                gap: 16,
               }}
             >
-              FULL STACK DEVELOPER
+              {/* eslint-disable-next-line @next/next/no-img-element -- satori renders plain img elements */}
+              <img
+                src={avatarSrc}
+                alt=""
+                width={52}
+                height={52}
+                style={{
+                  width: 52,
+                  height: 52,
+                  borderRadius: '50%',
+                  border: '1px solid #262626',
+                  objectFit: 'cover',
+                }}
+              />
+              <div
+                style={{
+                  display: 'flex',
+                  fontSize: 24,
+                  color: '#a3a3a3',
+                  fontFamily: 'Geist Mono',
+                  letterSpacing: '0.1em',
+                }}
+              >
+                Yiwei Ho
+              </div>
             </div>
           </div>
           <div
