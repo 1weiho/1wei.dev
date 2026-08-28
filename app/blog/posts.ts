@@ -16,6 +16,11 @@ const posts = [
     title: 'Tokyo AI Hackathon',
     date: '2025-11-22',
   },
+  {
+    slug: 'why-i-built-open-slide',
+    title: 'Why I built open-slide',
+    date: '2026-08-28',
+  },
 ] as Post[]
 
 export { posts }
