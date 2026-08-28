@@ -4,11 +4,11 @@ import YouTubeEmbed from '@/components/youtube-embed'
 export const metadata = {
   title: 'Why I built open-slide',
   description:
-    'How an idea on the way home after an event became an open-source presentation framework for coding agents.',
+    'How an idea on the way home from a meetup became an open-source presentation framework for coding agents.',
   openGraph: {
     title: 'Why I built open-slide',
     description:
-      'How an idea on the way home after an event became an open-source presentation framework for coding agents.',
+      'How an idea on the way home from a meetup became an open-source presentation framework for coding agents.',
     images: [
       {
         url: generateOgImageUrl('Why I built open-slide'),
@@ -22,7 +22,7 @@ export const metadata = {
 
 In April 2026, I went to a [Cursor meetup](https://luma.com/43054c24) in Taichung. Several speakers had used coding agents to generate their presentations as HTML. The results were impressive: custom layouts, interactive demos, and visuals that would have been difficult to produce in a traditional slide editor.
 
-But on my way home after the event, I kept thinking about everything the agents had to build before they could make a single useful slide.
+But on my way home from the meetup, I kept thinking about everything the agents had to build before they could make a single useful slide.
 
 Every generated deck needed its own navigation, keyboard controls, progress indicator, presentation mode, and page structure. Because each one started from scratch, the interface changed from deck to deck. And after making a few of them, you ended up with standalone HTML files scattered across different folders, each with its own little implementation of the same presentation software.
 
@@ -49,7 +49,7 @@ This changes the division of labor:
 
 The constraints still matter. Every page uses a fixed 1920 × 1080 canvas. A deck has a predictable file structure. Assets live next to the deck that uses them. But inside that frame, every slide is just a React component. It can be a static composition, an animated sequence, an interactive diagram, or a live product demo.
 
-The goal is not to remove structure. It is to put structure in the right layer.
+open-slide handles the structure agents should not have to rebuild, but it does not decide what goes on each slide.
 
 ### A workspace, not another generated file
 
@@ -65,7 +65,7 @@ Third, multiple presentations had to live together. Creating a deck should mean 
 
 ![The first version of open-slide](/assets/blog/why-i-built-open-slide/first-version.webp)
 
-The first prototype produced by Claude Code was surprisingly close to what I had imagined. It had a React app, a player, a presentation canvas, a sidebar, and a small library for the core presentation behavior. The architecture later moved into an npm package, but the original model held up: the framework provides the stage, and each deck provides the performance.
+The first prototype produced by Claude Code was surprisingly close to what I had imagined. It had a React app, a player, a presentation canvas, a sidebar, and a small library for the core presentation behavior. The architecture later moved into an npm package, but the original split remained: the framework runs the presentation, while each deck defines its content and behavior.
 
 That early result taught me something important about building with agents. A clear boundary is often more valuable than a highly detailed specification. Once the agent knew which responsibilities belonged to the runtime and which belonged to the generated deck, it could make good implementation decisions inside that boundary.
 
@@ -83,7 +83,7 @@ That is why open-slide is “skills first.” The framework ships with instructi
 - `slide-authoring` explains the technical contract, layout system, assets, transitions, and presentation-specific design rules.
 - `apply-comments` turns feedback left in the inspector into a focused editing workflow.
 
-The skills are versioned with the framework and can be updated as the APIs and best practices evolve. This is as important as the runtime itself. The code gives agents capabilities; the skills give them judgment about how to use those capabilities.
+The skills are versioned with the framework, so the instructions can change alongside the APIs and best practices. I consider them part of the product, not separate documentation.
 
 It also makes iteration feel natural. I can ask an agent to create a first draft, inspect the rendered slides, leave comments on several elements, and then ask it to apply all of that feedback. The source remains ordinary React, so I can make a direct edit whenever that is faster. There is no hidden document format and no one-way generation step.
 
@@ -102,23 +102,21 @@ That is much more interesting than putting a screenshot of a terminal on a slide
 
 This is the kind of design freedom I did not want to lose to template-based generation.
 
-open-slide includes primitives for progressive reveals, page transitions, and morph transitions, but they are intentionally primitives rather than finished visual styles. The framework gives the agent a vocabulary. It does not force every presentation to speak with the same voice.
+open-slide includes primitives for progressive reveals, page transitions, and morph transitions, but it does not prescribe a visual style for them. Agents can use the same primitives without making every deck look alike.
 
 ### Shipping changed the project
 
-I did not begin open-slide with a roadmap for building a popular open-source project. I had an idea on my way home after an event, wrote it down, and started testing it.
+I did not begin open-slide with a roadmap for building a popular open-source project. I had the idea on my way home from that meetup, wrote it down, and started testing it.
 
 Then I shared the work.
 
-I posted the [first release on X](https://x.com/1weiho/status/2050602481953181968?s=20). After that, I kept posting small features: image placeholders, global assets, step animations, morph transitions, and improvements to the authoring workflow. When a new model such as Opus 5 came out, I used open-slide to test what it could do and [shared the resulting deck](https://x.com/1weiho/status/2081336660026069210). That connected the project to conversations people were already having, while still showing the product honestly.
+I posted the [first release on X](https://x.com/1weiho/status/2050602481953181968?s=20). After that, I kept posting small features: image placeholders, global assets, step animations, morph transitions, and improvements to the authoring workflow. When a new model such as Opus 5 came out, I used open-slide to test what it could do and [shared the resulting deck](https://x.com/1weiho/status/2081336660026069210). That let me join conversations people were already having while giving them something concrete to try.
 
 Within the first week, open-slide reached GitHub Trending. By the time I gave my [COSCUP 2026 talk](https://www.youtube.com/watch?v=BWgFrY91F_I), it had passed 6,000 GitHub stars and was attracting a growing group of contributors. I also began seeing it used at events I had nothing to do with.
 
-None of that happened simply because the repository existed.
+Each update gave more people a chance to find the project. Threads helped me connect with the local developer community in Taiwan. X helped the project reach developers and open-source maintainers around the world. Sharing in English was uncomfortable at first, but it led to conversations, issues, pull requests, and relationships I would have missed if I had waited until my English—or the product—felt perfect.
 
-Building in public gave people repeated chances to understand the project. Threads helped me connect with the local developer community in Taiwan. X helped the project reach developers and open-source maintainers around the world. Sharing in English was uncomfortable at first, but it created conversations, issues, pull requests, and relationships that would not have happened if I had waited until my English—or the product—felt perfect.
-
-Promotion is not separate from building. For an open-source project, it is how the work meets its community.
+Those posts are how many people found the project and began contributing.
 
 ### Four lessons I am taking with me
 
@@ -126,35 +124,31 @@ Building open-slide reinforced four habits that I want to carry into future proj
 
 #### 1. Capture every idea
 
-Small ideas disappear quickly. Write them down before deciding whether they are good. The note I wrote on my way home became a working prototype because it survived long enough to be tested.
+Small ideas disappear quickly, so I try to write them down before judging them. The note I wrote on my way home later became the first open-slide prototype.
 
-AI makes this more valuable, not less. The cost of turning an idea into something you can evaluate has dropped dramatically. A rough thought no longer needs to become a complete plan before you can learn from it.
+Coding agents have made those notes more useful to me because I can turn a rough thought into a prototype before I have a complete plan.
 
 #### 2. Build before you overthink
 
-Thinking feels safe because nothing has failed yet. Building creates friction, but friction produces information. The first version will reveal problems that no amount of planning could predict.
-
-Start, get stuck, adjust, and continue. Each step is progress.
+I learned more from the first working prototype than I would have from spending more time on the plan. Every rough edge gave me something specific to fix.
 
 #### 3. Help the work get seen
 
-A good project can remain invisible if nobody talks about it. Share the first version. Share the tiny feature. Share what failed and what changed. Do it in places where the people you want to learn from already spend time.
-
-The goal is not to manufacture attention. It is to make the work available for discovery, feedback, and use.
+I shared small releases as I built them. That gave people more opportunities to try the project and tell me what worked or was missing.
 
 #### 4. Do not be afraid to communicate in English
 
 My English is not perfect. It does not need to be.
 
-A short post can reach a future contributor. A thoughtful issue can start a collaboration. A pull request to a project you admire can become an introduction to its maintainer. Open source is full of these small doors, and language should not stop us from trying to open them.
+Posting in English led to issues, pull requests, and conversations that I would otherwise have missed.
 
 ### What I am really building
 
-open-slide started as a way to stop agents from wasting tokens on presentation plumbing. It has grown into a larger experiment about creative tools for agents.
+open-slide started as a way to stop agents from wasting tokens on presentation plumbing. It has since become my way of exploring how creative tools should work when agents are part of the process.
 
-I do not want AI to make every presentation look the same. I want it to help more people turn an idea into a visual experience that feels intentional, specific, and alive. That requires more than generation. It requires a good runtime, a clear contract, useful primitives, durable source code, and a workflow where human taste can guide each iteration.
+I do not want AI to make every presentation look the same. open-slide gives agents enough structure to move quickly without locking the deck into a template. It handles the mechanics while leaving the direction to the author.
 
-That is what I am trying to build with open-slide: not a machine that finishes the presentation for you, but a medium in which you and an agent can make a better one together.
+I want open-slide to be a practical way for a person and an agent to work on the same presentation. The code stays visible, and I can step in whenever I want to change the design myself.
 
 If you have an idea that has been sitting in your notes, build the first version. It does not need to begin with a perfect roadmap. Sometimes it begins on the way home.
 
