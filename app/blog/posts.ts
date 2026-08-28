@@ -19,7 +19,7 @@ const posts = [
   {
     slug: 'why-i-built-open-slide',
     title: 'Why I built open-slide',
-    date: '2026-08-23',
+    date: '2026-08-28',
   },
 ] as Post[]
 
