@@ -47,5 +47,10 @@
     "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwindcss": "^4.0.0",
     "typescript": "^5"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "sharp"
+    ]
   }
 }
