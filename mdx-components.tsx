@@ -1,6 +1,7 @@
 import { highlightToHtml } from './lib/shiki'
 import { parseUrl } from './lib/utils'
 import CopyButton from '@/components/ui/copy-button'
+import ZoomImage from '@/components/zoom-image'
 import type { MDXComponents } from 'mdx/types'
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
@@ -53,6 +54,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         />
       )
     },
+    img: (props) => <ZoomImage {...props} />,
     a: (props) => {
       const href = props.href
       if (href && (href.startsWith('http://') || href.startsWith('https://'))) {
