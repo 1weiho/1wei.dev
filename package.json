@@ -22,7 +22,7 @@
     "clsx": "^2.1.1",
     "cobe": "^0.6.3",
     "lucide-react": "^0.471.1",
-    "maplibre-gl": "^5.15.0",
+    "maplibre-gl": "^6.6.0",
     "next": "16.3.3",
     "next-themes": "^0.4.6",
     "react": "19.2.3",
