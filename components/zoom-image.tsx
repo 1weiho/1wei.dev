@@ -6,8 +6,8 @@ import { createPortal } from 'react-dom'
 type Phase = 'closed' | 'opening' | 'open' | 'closing'
 
 const ZOOM_MARGIN = 40
-const DURATION = 400
-const EASING = 'cubic-bezier(0.32, 0.72, 0, 1)'
+const DURATION = 650
+const EASING = 'cubic-bezier(0.22, 1, 0.36, 1)'
 
 export default function ZoomImage(
   props: React.ImgHTMLAttributes<HTMLImageElement>,
