@@ -9,9 +9,10 @@ import {
   MapControls,
   useMap,
 } from '@/components/ui/map'
-import { Grid, MapIcon, Maximize, X } from 'lucide-react'
+import ZoomOverlay, { type ZoomTarget } from '@/components/zoom-overlay'
+import { Grid, MapIcon, Maximize } from 'lucide-react'
 import Image from 'next/image'
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 
 type ImageData = {
   path: string
@@ -27,10 +28,33 @@ type PhotoGalleryProps = {
 
 export default function PhotoGallery({ images }: PhotoGalleryProps) {
   const [viewMode, setViewMode] = useState<'grid' | 'map'>('grid')
-  const [fullscreenImage, setFullscreenImage] = useState<ImageData | null>(null)
+  const [zoomTarget, setZoomTarget] = useState<ZoomTarget | null>(null)
   const [pendingFocusImage, setPendingFocusImage] = useState<ImageData | null>(
     null,
   )
+
+  const openZoom = useCallback((container: HTMLElement, image: ImageData) => {
+    const img = container.querySelector('img')
+    setZoomTarget((current) =>
+      current
+        ? current
+        : {
+            rect: container.getBoundingClientRect(),
+            src: img?.currentSrc || image.path,
+            fullSrc: image.path,
+            naturalWidth: img?.naturalWidth ?? 0,
+            naturalHeight: img?.naturalHeight ?? 0,
+            alt: image.description,
+            originEl: container,
+            caption: (
+              <div className="bg-gradient-to-t from-black/60 to-transparent p-4 text-white">
+                <p className="font-medium">{image.description}</p>
+                <p className="text-sm text-white/70">{image.date}</p>
+              </div>
+            ),
+          },
+    )
+  }, [])
 
   const handleLocationClick = (image: ImageData) => {
     setPendingFocusImage(image)
@@ -97,16 +121,23 @@ export default function PhotoGallery({ images }: PhotoGalleryProps) {
         <div className="mt-8 grid md:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-16">
           {[...images].reverse().map((image, index) => (
             <div key={index} className="group">
-              <AspectRatio ratio={3 / 4} className="overflow-hidden">
-                <Image
-                  src={image.path}
-                  alt={image.description}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                  priority={index < 8}
-                />
-              </AspectRatio>
+              <button
+                type="button"
+                onClick={(e) => openZoom(e.currentTarget, image)}
+                className="block w-full cursor-zoom-in"
+                aria-label={`View ${image.description} fullscreen`}
+              >
+                <AspectRatio ratio={3 / 4} className="overflow-hidden">
+                  <Image
+                    src={image.path}
+                    alt={image.description}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                    priority={index < 8}
+                  />
+                </AspectRatio>
+              </button>
               <div className="flex justify-between text-xs text-gray-500 mt-1">
                 <p className="tabular-nums">{image.date}</p>
                 {image.latitude && image.longitude && (
@@ -130,7 +161,7 @@ export default function PhotoGallery({ images }: PhotoGalleryProps) {
             <MapControls showZoom showFullscreen />
             <PhotoMarkers
               images={imagesWithLocation}
-              onFullscreen={setFullscreenImage}
+              onFullscreen={openZoom}
               pendingFocusImage={pendingFocusImage}
               onFocusHandled={() => setPendingFocusImage(null)}
             />
@@ -138,36 +169,13 @@ export default function PhotoGallery({ images }: PhotoGalleryProps) {
         </div>
       )}
 
-      {/* Fullscreen Lightbox */}
-      {fullscreenImage && (
-        <div
-          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center animate-in fade-in-0 duration-200"
-          onClick={() => setFullscreenImage(null)}
-        >
-          <button
-            onClick={() => setFullscreenImage(null)}
-            className="absolute top-4 right-4 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
-            aria-label="Close fullscreen"
-          >
-            <X className="size-6" />
-          </button>
-          <div
-            className="relative max-w-[90vw] max-h-[90vh]"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Image
-              src={fullscreenImage.path}
-              alt={fullscreenImage.description}
-              width={1200}
-              height={1600}
-              className="max-w-full max-h-[90vh] object-contain"
-            />
-            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent text-white">
-              <p className="font-medium">{fullscreenImage.description}</p>
-              <p className="text-sm text-white/70">{fullscreenImage.date}</p>
-            </div>
-          </div>
-        </div>
+      {/* Fullscreen zoom */}
+      {zoomTarget && (
+        <ZoomOverlay
+          target={zoomTarget}
+          backdropClassName="bg-black/90"
+          onClosed={() => setZoomTarget(null)}
+        />
       )}
     </div>
   )
@@ -180,12 +188,13 @@ function PhotoMarkers({
   onFocusHandled,
 }: {
   images: ImageData[]
-  onFullscreen: (image: ImageData) => void
+  onFullscreen: (container: HTMLElement, image: ImageData) => void
   pendingFocusImage: ImageData | null
   onFocusHandled: () => void
 }) {
   const { map } = useMap()
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const popupImageBoxRef = useRef<HTMLDivElement>(null)
 
   const handleMarkerClick = useCallback(
     (image: ImageData, index: number) => {
@@ -268,7 +277,10 @@ function PhotoMarkers({
           onClose={() => setActiveIndex(null)}
           className="!p-0 !border-0 !bg-transparent !shadow-none w-[300px] focus:outline-none cursor-default"
         >
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-sm shadow-2xl ring-4 ring-white group isolate">
+          <div
+            ref={popupImageBoxRef}
+            className="relative aspect-[4/3] w-full overflow-hidden rounded-sm shadow-2xl ring-4 ring-white group isolate"
+          >
             <Image
               fill
               src={activeImage.path}
@@ -289,7 +301,11 @@ function PhotoMarkers({
             </div>
 
             <button
-              onClick={() => onFullscreen(activeImage)}
+              onClick={() => {
+                if (popupImageBoxRef.current) {
+                  onFullscreen(popupImageBoxRef.current, activeImage)
+                }
+              }}
               className="absolute top-3 right-3 p-2 text-white/70 hover:text-white transition-colors opacity-0 group-hover:opacity-100"
               aria-label="View fullscreen"
             >
