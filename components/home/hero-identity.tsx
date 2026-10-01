@@ -10,7 +10,7 @@ import {
   useState,
 } from 'react'
 
-// Distance from the viewport top where the avatar docks (matches `pt-4`)
+// Distance from the viewport top where the avatar docks (matches `top-4`)
 const DOCK_TOP = 16
 const DURATION = 500
 const EASING = 'cubic-bezier(0.32, 0.72, 0, 1)'
@@ -170,13 +170,15 @@ const HeroIdentity = () => {
         <div className="absolute inset-0 bg-linear-to-b from-background via-background/70 to-transparent" />
       </div>
 
-      {/* Safari 26 draws the page under the status bar and only fills that
-          area with a fixed element's own opaque background touching the
-          viewport top, otherwise the content scrolls past unblurred */}
+      {/* Safari 26 draws the page under the status bar and fills that area
+          only from the topmost fixed element touching the viewport top, using
+          its own opaque background. Keep this strip above the paper grain
+          (z-40) and keep everything else off the top edge, otherwise the
+          content scrolls past unblurred */}
       <div
         aria-hidden
         className={cn(
-          'fixed inset-x-0 top-0 z-20 h-4 transition-colors duration-500',
+          'fixed inset-x-0 top-0 z-[45] h-4 transition-colors duration-500',
           docked ? 'bg-background' : 'pointer-events-none bg-transparent',
         )}
       />
@@ -184,10 +186,7 @@ const HeroIdentity = () => {
       {/* Docked header */}
       <div
         inert={!docked}
-        className={cn(
-          'fixed inset-x-0 top-0 z-30',
-          !docked && 'pointer-events-none',
-        )}
+        className="pointer-events-none fixed inset-x-0 top-4 z-30"
       >
         <div className="container mx-auto px-6">
           <button
@@ -195,8 +194,8 @@ const HeroIdentity = () => {
             aria-label="Back to top"
             onClick={() => window.scrollTo({ top: 0 })}
             className={cn(
-              'mt-4 flex items-center gap-3 rounded-full',
-              !docked && 'opacity-0',
+              'flex items-center gap-3 rounded-full',
+              docked ? 'pointer-events-auto' : 'opacity-0',
             )}
           >
             <div ref={dockAvatarRef} className="origin-top-left">
