@@ -2,7 +2,7 @@ export interface Project {
   title: string
   description: string
   url: string
-  image: string
+  preview: React.ReactNode
 }
 
 export interface Post {

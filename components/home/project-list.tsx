@@ -1,7 +1,5 @@
 'use client'
 
-import ProjectItem from './project'
-import { Project } from '@/lib/type'
 import { cn } from '@/lib/utils'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -10,7 +8,7 @@ const arrowClassName =
   'flex size-10 items-center justify-center rounded-full border border-black/10 text-black transition-all duration-300 hover:bg-neutral-100 active:scale-95 disabled:pointer-events-none disabled:opacity-30'
 
 // Horizontal carousel on mobile, grid from `md` up
-const ProjectList = ({ projects }: { projects: Project[] }) => {
+const ProjectList = ({ children }: { children: React.ReactNode }) => {
   const trackRef = useRef<HTMLUListElement>(null)
   const [canPrev, setCanPrev] = useState(false)
   const [canNext, setCanNext] = useState(true)
@@ -49,14 +47,7 @@ const ProjectList = ({ projects }: { projects: Project[] }) => {
           'md:mx-0 md:grid md:grid-cols-2 md:gap-x-6 md:gap-y-12 md:overflow-visible md:px-0 lg:grid-cols-3',
         )}
       >
-        {projects.map((project) => (
-          <li
-            key={project.url}
-            className="w-[85%] shrink-0 snap-start md:w-auto"
-          >
-            <ProjectItem {...project} />
-          </li>
-        ))}
+        {children}
       </ul>
 
       <div className="mt-6 flex justify-end gap-3 md:hidden">
