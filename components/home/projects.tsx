@@ -1,6 +1,4 @@
-import ProjectItem from './project'
-import Findrink from '@/components/svg/findrink'
-import OpenSlide from '@/components/svg/open-slide'
+import ProjectList from './project-list'
 import { Project } from '@/lib/type'
 
 const projects: Project[] = [
@@ -14,41 +12,39 @@ const projects: Project[] = [
     title: 'open-slide',
     description: 'A slide framework built for agents.',
     url: 'https://open-slide.dev/',
-    category: 'website',
-    icon: OpenSlide,
+    image: '/assets/projects/open-slide.webp',
   },
   {
     title: 'SVGL Raycast Extension',
     description: 'The Raycast extension to search SVG logos via svgl.',
     url: 'https://www.raycast.com/1weiho/svgl',
-    category: 'raycast-extension',
+    image: '/assets/projects/svgl-raycast.webp',
   },
   {
     title: 'Next Lens',
     description:
       'A CLI tool for Next.js App Router to scan and list API and Page routes.',
     url: 'https://next-lens.1wei.dev/',
-    category: 'npm-package',
+    image: '/assets/projects/next-lens.webp',
   },
   {
     title: 'Open Graph Raycast Extension',
     description: 'Preview Open Graph meta tags of a website.',
     url: 'https://www.raycast.com/1weiho/open-graph',
-    category: 'raycast-extension',
+    image: '/assets/projects/open-graph-raycast.webp',
   },
   {
     title: 'Next Sandbox',
     description:
       'A lightweight tool for testing and monitoring server actions in Next.js.',
     url: 'https://next-sandbox.1wei.dev/',
-    category: 'npm-package',
+    image: '/assets/projects/next-sandbox.webp',
   },
   {
     title: 'Findrink',
     description: 'A menu search platform for bubble tea brands in Taiwan.',
     url: 'https://findrink.tw/',
-    category: 'website',
-    icon: Findrink,
+    image: '/assets/projects/findrink.webp',
   },
   // {
   //   title: 'rwdot',
@@ -65,11 +61,7 @@ const Projects = () => {
         Projects
       </h2>
 
-      <div className="mt-8 space-y-8 md:space-y-12">
-        {projects.map((project, index) => (
-          <ProjectItem key={index} {...project} />
-        ))}
-      </div>
+      <ProjectList projects={projects} />
     </div>
   )
 }
