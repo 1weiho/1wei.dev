@@ -1,3 +1,4 @@
+import BuyMeACoffee from '@/components/svg/buy-me-a-coffee'
 import Github from '@/components/svg/github'
 import X from '@/components/svg/x'
 import Image from 'next/image'
@@ -51,6 +52,15 @@ const Hero = () => {
         >
           <Github className="grayscale-0 md:grayscale opacity-100 md:opacity-50 transition-all duration-300 md:group-hover:grayscale-0 md:group-hover:opacity-100" />
           GitHub
+        </Link>
+
+        <Link
+          href="https://buymeacoffee.com/1weiho"
+          target="_blank"
+          className="flex items-center gap-2 hover:text-black duration-300 group text-sm md:text-base"
+        >
+          <BuyMeACoffee className="grayscale-0 md:grayscale opacity-100 md:opacity-50 transition-all duration-300 md:group-hover:grayscale-0 md:group-hover:opacity-100" />
+          Sponsor
         </Link>
       </div>
     </div>
