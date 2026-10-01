@@ -5,12 +5,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@theme inline {
+@theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
 
-@theme {
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
 
