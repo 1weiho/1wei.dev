@@ -211,7 +211,7 @@ const Navbar = () => {
           aria-expanded={open}
           aria-controls="site-menu"
           onClick={() => setOpen((value) => !value)}
-          className="pointer-events-auto flex h-9 items-center gap-2.5 rounded-full bg-background/70 pr-4 pl-3.5 font-mono text-sm text-black ring-1 ring-black/[0.08] backdrop-blur-md transition-[background-color,box-shadow] duration-300 hover:bg-black/[0.04] hover:ring-black/15"
+          className="pointer-events-auto flex h-9 items-center gap-2.5 font-mono text-sm transition-colors duration-300 hover:text-black aria-expanded:text-black md:text-base"
         >
           {/* Two bars that cross into an X */}
           <span aria-hidden className="relative size-3.5">
