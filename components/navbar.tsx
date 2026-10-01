@@ -71,7 +71,7 @@ const Navbar = () => {
   return (
     <nav
       ref={navRef}
-      className="relative mt-12 -ml-2.5 flex items-center gap-0.5 text-sm md:-ml-3 md:gap-3 md:text-base"
+      className="relative mt-12 -ml-2.5 flex font-mono items-center gap-0.5 text-sm md:-ml-3 md:gap-3 md:text-base"
       onMouseLeave={() => setHoveredKey(null)}
     >
       {/* Sliding ghost highlight */}

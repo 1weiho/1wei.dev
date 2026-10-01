@@ -1,18 +1,10 @@
 import './globals.css'
 import Navbar from '@/components/navbar'
 import { Analytics } from '@vercel/analytics/next'
+import { GeistMono } from 'geist/font/mono'
+import { GeistSans } from 'geist/font/sans'
 import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono, Instrument_Serif } from 'next/font/google'
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-})
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-})
+import { Instrument_Serif } from 'next/font/google'
 
 const instrumentSerif = Instrument_Serif({
   variable: '--font-instrument-serif',
@@ -52,11 +44,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} antialiased`}
-      >
-        <div className="container mx-auto font-[family-name:var(--font-geist-mono)] px-6">
+    <html
+      lang="en"
+      className={`${GeistSans.variable} ${GeistMono.variable} ${instrumentSerif.variable}`}
+    >
+      <body className="antialiased">
+        <div className="container mx-auto px-6">
           <Navbar />
           {children}
         </div>
