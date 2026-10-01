@@ -168,10 +168,18 @@ const HeroIdentity = () => {
           />
         ))}
         <div className="absolute inset-0 bg-linear-to-b from-background via-background/70 to-transparent" />
-        {/* iOS Safari draws the page under the status bar, above the fixed
-            viewport's top edge, so extend the opaque top beyond it */}
-        <div className="absolute inset-x-0 bottom-full h-32 bg-background" />
       </div>
+
+      {/* Safari 26 draws the page under the status bar and only fills that
+          area with a fixed element's own opaque background touching the
+          viewport top, otherwise the content scrolls past unblurred */}
+      <div
+        aria-hidden
+        className={cn(
+          'fixed inset-x-0 top-0 z-20 h-4 transition-colors duration-500',
+          docked ? 'bg-background' : 'pointer-events-none bg-transparent',
+        )}
+      />
 
       {/* Docked header */}
       <div
