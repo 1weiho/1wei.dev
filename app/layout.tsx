@@ -52,11 +52,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} antialiased`}
-      >
-        <div className="container mx-auto font-[family-name:var(--font-geist-mono)] px-6">
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable}`}
+    >
+      <body className="font-sans antialiased">
+        <div className="container mx-auto px-6">
           <Navbar />
           {children}
         </div>

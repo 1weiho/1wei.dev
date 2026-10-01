@@ -15,7 +15,7 @@ const PostItem = ({ slug, title, date }: Post) => {
         </div>
 
         <div className="flex items-center shrink-0">
-          <p className="text-xs tabular-nums text-black/40 transition-colors duration-300 group-hover:text-black/60">
+          <p className="font-mono text-xs tabular-nums text-black/40 transition-colors duration-300 group-hover:text-black/60">
             {date}
           </p>
         </div>
