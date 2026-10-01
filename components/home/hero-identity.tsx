@@ -168,6 +168,9 @@ const HeroIdentity = () => {
           />
         ))}
         <div className="absolute inset-0 bg-linear-to-b from-background via-background/70 to-transparent" />
+        {/* iOS Safari draws the page under the status bar, above the fixed
+            viewport's top edge, so extend the opaque top beyond it */}
+        <div className="absolute inset-x-0 bottom-full h-32 bg-background" />
       </div>
 
       {/* Docked header */}
