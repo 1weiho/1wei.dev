@@ -2,6 +2,7 @@
 
 import Github from '@/components/svg/github'
 import X from '@/components/svg/x'
+import TopBlur from '@/components/top-blur'
 import UTC8Clock from '@/components/utc-8-clock'
 import { cn } from '@/lib/utils'
 import { ArrowUpRight } from 'lucide-react'
@@ -40,6 +41,9 @@ const socials = [
 
 const EASING = 'ease-[cubic-bezier(0.32,0.72,0,1)]'
 
+// Where the header sticks (matches `top-4`)
+const STICKY_TOP = 16
+
 // Items rise in one after another on open, and leave together on close
 const stagger = (open: boolean, index: number) => ({
   transitionDelay: open ? `${120 + index * 45}ms` : '0ms',
@@ -61,6 +65,10 @@ const Navbar = () => {
   const [open, setOpen] = useState(false)
   const triggerRef = useRef<HTMLButtonElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
+  const headerRef = useRef<HTMLElement>(null)
+
+  // Whether the header has left its spot and floats over the content
+  const [floating, setFloating] = useState(false)
 
   // Close when the route changes underneath the menu, e.g. browser back
   const [prevPathname, setPrevPathname] = useState(pathname)
@@ -68,6 +76,27 @@ const Navbar = () => {
     setPrevPathname(pathname)
     setOpen(false)
   }
+
+  useEffect(() => {
+    let frame = 0
+    const update = () => {
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(() => {
+        const header = headerRef.current
+        if (!header) return
+        setFloating(header.getBoundingClientRect().top <= STICKY_TOP)
+      })
+    }
+
+    update()
+    window.addEventListener('scroll', update, { passive: true })
+    window.addEventListener('resize', update)
+    return () => {
+      cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', update)
+      window.removeEventListener('resize', update)
+    }
+  }, [pathname])
 
   useEffect(() => {
     if (!open) return
@@ -115,6 +144,9 @@ const Navbar = () => {
 
   return (
     <>
+      {/* Home docks its own header and drives the blur from that instead */}
+      {pathname !== '/' && <TopBlur visible={floating} />}
+
       {/* Full-screen menu. Sits just under the paper grain (z-40) so it keeps
           the texture, and over the docked home header (z-30) so it blurs it */}
       <div
@@ -204,7 +236,10 @@ const Navbar = () => {
 
       {/* Takes the old inline nav's spot, then floats along once scrolled.
           Only the button catches clicks, so the docked header stays usable */}
-      <header className="pointer-events-none sticky top-4 z-[39] mt-12 flex h-9 justify-end">
+      <header
+        ref={headerRef}
+        className="pointer-events-none sticky top-4 z-[39] mt-12 flex h-9 justify-end"
+      >
         <button
           ref={triggerRef}
           type="button"
