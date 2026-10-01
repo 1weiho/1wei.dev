@@ -25,6 +25,18 @@ const blurLayers = [
   { blur: 8, end: 40 },
 ]
 
+// Background veil: solid behind the status bar strip (`h-4`), then an eased
+// fade to transparent. A linear fade shows hard bands over dark content
+const veilSteps = 12
+const veil = `linear-gradient(to bottom, ${Array.from(
+  { length: veilSteps + 1 },
+  (_, i) => {
+    const t = i / veilSteps
+    const alpha = (1 + Math.cos(Math.PI * t)) / 2
+    return `hsl(var(--background) / ${alpha.toFixed(3)}) calc(1rem + (100% - 1rem) * ${t.toFixed(3)})`
+  },
+).join(', ')})`
+
 // FLIP: play `to` from where `from` currently is on screen, so the two
 // elements read as one element morphing between positions
 const morph = (from: HTMLElement, to: HTMLElement) => {
@@ -151,14 +163,16 @@ const HeroIdentity = () => {
       <div
         aria-hidden
         className={cn(
-          'pointer-events-none fixed inset-x-0 top-0 z-20 h-32 transition-opacity duration-500 md:h-36',
+          'pointer-events-none fixed inset-x-0 top-0 z-20 h-32 overflow-hidden transition-opacity duration-500 md:h-36',
           docked ? 'opacity-100' : 'opacity-0',
         )}
       >
         {blurLayers.map(({ blur, end }) => (
           <div
             key={blur}
-            className="absolute inset-0"
+            // Bleed past the sides, Safari draws a hard edge where a
+            // backdrop blur ends
+            className="absolute inset-y-0 -inset-x-8"
             style={{
               backdropFilter: `blur(${blur}px)`,
               WebkitBackdropFilter: `blur(${blur}px)`,
@@ -167,7 +181,7 @@ const HeroIdentity = () => {
             }}
           />
         ))}
-        <div className="absolute inset-0 bg-linear-to-b from-background via-background/70 to-transparent" />
+        <div className="absolute inset-0" style={{ backgroundImage: veil }} />
       </div>
 
       {/* Safari 26 draws the page under the status bar and fills that area
