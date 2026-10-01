@@ -1,6 +1,11 @@
 import ProjectItem from './project'
-import Findrink from '@/components/svg/findrink'
-import OpenSlide from '@/components/svg/open-slide'
+import ProjectList from './project-list'
+import FindrinkMock from './project-mocks/findrink'
+import NextLensMock from './project-mocks/next-lens'
+import NextSandboxMock from './project-mocks/next-sandbox'
+import OpenGraphMock from './project-mocks/open-graph'
+import OpenSlideMock from './project-mocks/open-slide'
+import SvglMock from './project-mocks/svgl'
 import { Project } from '@/lib/type'
 
 const projects: Project[] = [
@@ -14,41 +19,39 @@ const projects: Project[] = [
     title: 'open-slide',
     description: 'A slide framework built for agents.',
     url: 'https://open-slide.dev/',
-    category: 'website',
-    icon: OpenSlide,
+    preview: <OpenSlideMock />,
   },
   {
     title: 'SVGL Raycast Extension',
     description: 'The Raycast extension to search SVG logos via svgl.',
     url: 'https://www.raycast.com/1weiho/svgl',
-    category: 'raycast-extension',
+    preview: <SvglMock />,
   },
   {
     title: 'Next Lens',
     description:
       'A CLI tool for Next.js App Router to scan and list API and Page routes.',
     url: 'https://next-lens.1wei.dev/',
-    category: 'npm-package',
+    preview: <NextLensMock />,
   },
   {
     title: 'Open Graph Raycast Extension',
     description: 'Preview Open Graph meta tags of a website.',
     url: 'https://www.raycast.com/1weiho/open-graph',
-    category: 'raycast-extension',
+    preview: <OpenGraphMock />,
   },
   {
     title: 'Next Sandbox',
     description:
       'A lightweight tool for testing and monitoring server actions in Next.js.',
     url: 'https://next-sandbox.1wei.dev/',
-    category: 'npm-package',
+    preview: <NextSandboxMock />,
   },
   {
     title: 'Findrink',
     description: 'A menu search platform for bubble tea brands in Taiwan.',
     url: 'https://findrink.tw/',
-    category: 'website',
-    icon: Findrink,
+    preview: <FindrinkMock />,
   },
   // {
   //   title: 'rwdot',
@@ -65,11 +68,16 @@ const Projects = () => {
         Projects
       </h2>
 
-      <div className="mt-8 space-y-8 md:space-y-12">
-        {projects.map((project, index) => (
-          <ProjectItem key={index} {...project} />
+      <ProjectList>
+        {projects.map((project) => (
+          <li
+            key={project.url}
+            className="w-[85%] shrink-0 snap-start md:w-auto"
+          >
+            <ProjectItem {...project} />
+          </li>
         ))}
-      </div>
+      </ProjectList>
     </div>
   )
 }

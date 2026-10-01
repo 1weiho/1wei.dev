@@ -37,6 +37,27 @@
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
+
+  --text-2xs: 0.625rem;
+  --text-2xs--line-height: 1.4;
+}
+
+/*
+  Project preview mocks are designed on a 400px-wide canvas. Pointing the
+  spacing, type and radius scales at container units lets regular utilities
+  (p-4, text-xs, rounded-md…) scale with the card width.
+*/
+.mock-canvas {
+  --spacing: 1cqw;
+  --text-2xs: 2.25cqw;
+  --text-xs: 2.75cqw;
+  --text-sm: 3.25cqw;
+  --text-base: 4cqw;
+  --text-lg: 4.5cqw;
+  --text-xl: 5.5cqw;
+  --radius-sm: 0.75cqw;
+  --radius-md: 1.25cqw;
+  --radius-lg: 2cqw;
 }
 
 /*
