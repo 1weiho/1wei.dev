@@ -203,3 +203,57 @@
     content: ' ';
   }
 }
+
+/* Home greeting: each stroke is a thick line traced along the brush path and
+   clipped to the stroke outline, drawn in by sweeping its dash into view */
+@layer components {
+  .brush-stroke {
+    stroke-dasharray: calc(var(--length) * 1px)
+      calc((var(--length) + var(--brush)) * 1px);
+    stroke-dashoffset: calc((var(--length) + var(--brush) / 2) * 1px);
+    animation: brush-stroke both cubic-bezier(0.5, 0, 0.3, 1);
+  }
+  .brush-greeting-wave {
+    display: inline-block;
+    transform-origin: 70% 70%;
+    animation: brush-greeting-wave 1.2s both ease-in-out;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .brush-stroke,
+    .brush-greeting-wave {
+      animation: none;
+      stroke-dashoffset: 0;
+    }
+  }
+}
+
+@keyframes brush-stroke {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes brush-greeting-wave {
+  0% {
+    opacity: 0;
+    transform: rotate(0deg);
+  }
+  15% {
+    opacity: 1;
+    transform: rotate(14deg);
+  }
+  30% {
+    transform: rotate(-8deg);
+  }
+  45% {
+    transform: rotate(14deg);
+  }
+  60% {
+    transform: rotate(-4deg);
+  }
+  75%,
+  100% {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+}

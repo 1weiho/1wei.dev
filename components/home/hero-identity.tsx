@@ -1,5 +1,6 @@
 'use client'
 
+import BrushGreeting from '@/components/home/brush-greeting'
 import TopBlur from '@/components/top-blur'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
@@ -115,7 +116,7 @@ const HeroIdentity = () => {
             />
           </ViewTransition>
         </div>
-        <h1 className="text-2xl md:text-3xl text-black">你好 👋</h1>
+        <BrushGreeting />
       </div>
 
       <h2 className="mt-8 md:mt-16 text-3xl md:text-4xl text-black font-[family-name:var(--font-instrument-serif)]">
