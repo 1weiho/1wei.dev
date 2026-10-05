@@ -13,7 +13,7 @@
   "dependencies": {
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
-    "@next/mdx": "16.1.1",
+    "@next/mdx": "16.3.8",
     "@radix-ui/react-aspect-ratio": "^1.1.2",
     "@react-spring/web": "^10.1.2",
     "@types/mdx": "^2.0.14",
