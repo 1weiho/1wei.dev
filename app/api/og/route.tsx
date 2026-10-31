@@ -1,7 +1,5 @@
 import { ImageResponse } from 'next/og'
 import { NextRequest } from 'next/server'
-import { readFile } from 'node:fs/promises'
-import { join } from 'node:path'
 
 async function loadGoogleFont(font: string, text: string) {
   const url = `https://fonts.googleapis.com/css2?family=${font}&text=${encodeURIComponent(text)}`
@@ -13,6 +11,18 @@ async function loadGoogleFont(font: string, text: string) {
     if (response.status == 200) {
       return await response.arrayBuffer()
     }
+  }
+
+  throw new Error('failed to load font data')
+}
+
+// Geist Serif isn't on Google Fonts, so load the TTF from the official repo
+async function loadGeistSerif() {
+  const response = await fetch(
+    'https://raw.githubusercontent.com/vercel/geist-font/v1.9.0/fonts/GeistSerif/ttf/GeistSerif-Regular.ttf',
+  )
+  if (response.status == 200) {
+    return await response.arrayBuffer()
   }
 
   throw new Error('failed to load font data')
@@ -120,9 +130,7 @@ export async function GET(request: NextRequest) {
       fonts: [
         {
           name: 'Geist Serif',
-          data: await readFile(
-            join(process.cwd(), 'assets/fonts/GeistSerif-Regular.ttf'),
-          ),
+          data: await loadGeistSerif(),
           style: 'normal',
         },
         {
