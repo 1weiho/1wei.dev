@@ -118,7 +118,7 @@ const HeroIdentity = () => {
         <h1 className="text-2xl md:text-3xl text-black">你好 👋</h1>
       </div>
 
-      <h2 className="mt-8 md:mt-16 text-3xl md:text-4xl text-black font-[family-name:var(--font-instrument-serif)]">
+      <h2 className="mt-8 md:mt-16 text-3xl md:text-4xl text-black font-serif">
         <span
           ref={nameRef}
           className={cn(
@@ -166,7 +166,7 @@ const HeroIdentity = () => {
             </div>
             <span
               ref={dockNameRef}
-              className="inline-block origin-top-left leading-none text-2xl text-black font-[family-name:var(--font-instrument-serif)]"
+              className="inline-block origin-top-left leading-none text-2xl text-black font-serif"
             >
               Yiwei
             </span>

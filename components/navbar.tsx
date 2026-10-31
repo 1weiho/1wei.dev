@@ -184,7 +184,7 @@ const Navbar = () => {
                       </span>
                       <span
                         className={cn(
-                          'flex items-center gap-3 font-[family-name:var(--font-instrument-serif)] text-5xl leading-none transition-transform duration-500 group-hover:translate-x-2 md:text-7xl',
+                          'flex items-center gap-3 font-serif text-5xl leading-none transition-transform duration-500 group-hover:translate-x-2 md:text-7xl',
                           EASING,
                         )}
                       >

@@ -3,14 +3,8 @@ import Navbar from '@/components/navbar'
 import { Analytics } from '@vercel/analytics/next'
 import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'
+import { GeistSerif } from 'geist/font/serif'
 import type { Metadata, Viewport } from 'next'
-import { Instrument_Serif } from 'next/font/google'
-
-const instrumentSerif = Instrument_Serif({
-  variable: '--font-instrument-serif',
-  subsets: ['latin'],
-  weight: ['400'],
-})
 
 export const metadata: Metadata = {
   title: 'Yiwei Ho',
@@ -46,7 +40,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${GeistSans.variable} ${GeistMono.variable} ${instrumentSerif.variable}`}
+      className={`${GeistSans.variable} ${GeistMono.variable} ${GeistSerif.variable}`}
     >
       <body className="antialiased">
         <div className="container mx-auto px-6">
