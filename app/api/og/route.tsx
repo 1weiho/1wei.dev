@@ -16,18 +16,6 @@ async function loadGoogleFont(font: string, text: string) {
   throw new Error('failed to load font data')
 }
 
-// Geist Serif isn't on Google Fonts, so load the TTF from the official repo
-async function loadGeistSerif() {
-  const response = await fetch(
-    'https://raw.githubusercontent.com/vercel/geist-font/v1.9.0/fonts/GeistSerif/ttf/GeistSerif-Regular.ttf',
-  )
-  if (response.status == 200) {
-    return await response.arrayBuffer()
-  }
-
-  throw new Error('failed to load font data')
-}
-
 export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl
   const title = searchParams.get('title') ?? '1wei.dev'
@@ -115,7 +103,7 @@ export async function GET(request: NextRequest) {
               color: '#fafafa',
               lineHeight: 1.1,
               whiteSpace: 'pre-wrap',
-              fontFamily: 'Geist Serif',
+              fontFamily: 'Instrument Serif',
               maxWidth: 960,
             }}
           >
@@ -129,8 +117,8 @@ export async function GET(request: NextRequest) {
       height: 630,
       fonts: [
         {
-          name: 'Geist Serif',
-          data: await loadGeistSerif(),
+          name: 'Instrument Serif',
+          data: await loadGoogleFont('Instrument Serif', title),
           style: 'normal',
         },
         {
