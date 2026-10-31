@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 const PhotoPage = () => {
   return (
     <div className="mt-20 md:mt-32 pb-20">
-      <h1 className="text-2xl text-black">Photo</h1>
+      <h1 className="font-serif text-3xl text-black">Photo</h1>
       <h2 className="mt-1 text-gray-500 text-sm">
         Some memories I want to cherish.
       </h2>
