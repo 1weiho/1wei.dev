@@ -64,7 +64,7 @@ const projects: Project[] = [
 const Projects = () => {
   return (
     <div className="md:mt-40 mt-20">
-      <h2 className="mt-16 text-3xl md:text-4xl text-black font-[family-name:var(--font-instrument-serif)]">
+      <h2 className="mt-16 text-3xl md:text-4xl text-black font-serif">
         Projects
       </h2>
 

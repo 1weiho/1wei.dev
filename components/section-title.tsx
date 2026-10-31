@@ -78,7 +78,7 @@ const SectionTitle = () => {
             <span
               key={section.index}
               className={cn(
-                'truncate text-xl leading-9 text-black font-[family-name:var(--font-instrument-serif)] animate-in fade-in duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] motion-reduce:animate-none md:text-2xl md:leading-9',
+                'truncate text-xl leading-9 text-black font-serif animate-in fade-in duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] motion-reduce:animate-none md:text-2xl md:leading-9',
                 section.down ? 'slide-in-from-bottom-3' : 'slide-in-from-top-3',
               )}
             >

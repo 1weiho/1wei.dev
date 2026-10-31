@@ -1,5 +1,7 @@
 import { ImageResponse } from 'next/og'
 import { NextRequest } from 'next/server'
+import { readFile } from 'node:fs/promises'
+import { join } from 'node:path'
 
 async function loadGoogleFont(font: string, text: string) {
   const url = `https://fonts.googleapis.com/css2?family=${font}&text=${encodeURIComponent(text)}`
@@ -103,7 +105,7 @@ export async function GET(request: NextRequest) {
               color: '#fafafa',
               lineHeight: 1.1,
               whiteSpace: 'pre-wrap',
-              fontFamily: 'Instrument Serif',
+              fontFamily: 'Geist Serif',
               maxWidth: 960,
             }}
           >
@@ -117,8 +119,10 @@ export async function GET(request: NextRequest) {
       height: 630,
       fonts: [
         {
-          name: 'Instrument Serif',
-          data: await loadGoogleFont('Instrument Serif', title),
+          name: 'Geist Serif',
+          data: await readFile(
+            join(process.cwd(), 'assets/fonts/GeistSerif-Regular.ttf'),
+          ),
           style: 'normal',
         },
         {
